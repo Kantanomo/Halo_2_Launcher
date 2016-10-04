@@ -21,6 +21,7 @@ namespace Halo_2_Launcher.Controllers
         private int _StartingMonitor = 0;
         private bool _Intro = !Directory.Exists(Paths.InstallPath + "\\movie.bak");
         private bool _H2XFOV = false;
+        private int _fieldOfView = 78;
         private bool _RememberAccount = false;
         private string _RememberToken = "";
         private string _RememberUsername = "";
@@ -60,10 +61,10 @@ namespace Halo_2_Launcher.Controllers
             get { return this._Intro; }
             set { this._Intro = value; }
         }
-        public bool H2XFOV
+        public int FieldOfView
         {
-            get { return this._H2XFOV; }
-            set { this._H2XFOV = value; }
+            get { return this._fieldOfView; }
+            set { this._fieldOfView = value; }
         }
         public bool RememberAccount
         {
@@ -142,9 +143,9 @@ namespace Halo_2_Launcher.Controllers
                                 this.Intro = bool.Parse(Setting[1]);
                                 break;
                             }
-                        case "H2XFOV":
+                        case "FieldOfView":
                             {
-                                this.H2XFOV = bool.Parse(Setting[1]);
+                                this.FieldOfView = int.Parse(Setting[1]);
                                 break;
                             }
                         case "RememberAccount":
@@ -182,7 +183,7 @@ namespace Halo_2_Launcher.Controllers
             SB.AppendLine("H2VSync:" + H2VSync.ToString());
             SB.AppendLine("StartingMonitor:" + StartingMonitor.ToString());
             SB.AppendLine("Intro:" + Intro.ToString());
-            SB.AppendLine("H2XFOV:" + H2XFOV.ToString());
+            SB.AppendLine("FieldOfView:" + FieldOfView.ToString());
             SB.AppendLine("RememberAccount:" + RememberAccount.ToString());
             SB.AppendLine("RememberToken:" + EncryptStringAES(RememberToken));
             SB.AppendLine("RememberUsername:" + RememberUsername);
