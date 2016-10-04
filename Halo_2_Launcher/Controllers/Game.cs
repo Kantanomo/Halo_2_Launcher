@@ -11,10 +11,23 @@ namespace Halo_2_Launcher.Controllers
 {
     public class Game
     {
-        public void SetXboxFOV()
+        public void SetCustomFieldOfView()
         {
-            H2Launcher.Memory.WriteFloat(0, true, 0x41D984, 1.13f);//player
-            H2Launcher.Memory.WriteFloat(0, true, 0x413780, .943f);//vehicle
+            //Set custom FOV
+            var fovDegrees = H2Launcher.LauncherSettings.FieldOfView;
+            var fovRadian = (float)(fovDegrees * Math.PI) / 180;
+
+            H2Launcher.Memory.WriteFloat(0, true, 0x41D984, fovRadian); // Player
+            H2Launcher.Memory.WriteFloat(0, true, 0x413780, .943f); // Vehicle
+
+            //Set crosshair offset
+            var crosshairOffsetAddress = H2Launcher.Memory.ImageAddress(0, 4315524);
+            var derpCrosshairData = H2Launcher.Memory.ReadInt(0, crosshairOffsetAddress) + 252928;
+
+            //linear regression to approximate the proper offset
+            var calculatedOffset = (float)Math.Round(0.291f - (0.0021f * fovDegrees), 4, MidpointRounding.ToEven);
+
+            //Todo: write calculatedOffset
         }
         public void ApplyCrashFix()
         {
@@ -58,7 +71,7 @@ namespace Halo_2_Launcher.Controllers
             H2Launcher.XliveSettings.SaveSettings();
             if (!H2Launcher.LauncherSettings.Sound) Info.Arguments += "-nosound ";
             if (!H2Launcher.LauncherSettings.H2VSync) Info.Arguments += "-novsync ";
-            if (H2Launcher.LauncherSettings.H2XFOV) H2Launcher.Post.AddCommand("SetXboxFOV");
+            H2Launcher.Post.AddCommand("SetFieldOfView");
             //H2Launcher.Post.AddCommand("ApplyCrashFix");
             Process.Start(Info);
             H2Launcher.Post.RunCommands();
