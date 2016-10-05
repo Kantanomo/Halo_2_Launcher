@@ -22,6 +22,7 @@ namespace Halo_2_Launcher
         private static ProcessMemory _Memory;
         private static WebHandler _WebControl;
         private static XliveSettings _XliveSettings;
+        private static HotkeyController _HotKeyController;
         public static Halo_2_Launcher.Controllers.Settings LauncherSettings
         { get { if (H2Launcher._LauncherSettings == null) { H2Launcher._LauncherSettings = new Halo_2_Launcher.Controllers.Settings(); } return H2Launcher._LauncherSettings; } }
         public static XliveSettings XliveSettings
@@ -34,6 +35,11 @@ namespace Halo_2_Launcher
         { get { if (H2Launcher._Memory == null) { H2Launcher._Memory = new ProcessMemory("halo2"); } return H2Launcher._Memory; } }
         public static WebHandler WebControl
         { get { if (H2Launcher._WebControl == null) { H2Launcher._WebControl = new WebHandler(); } return H2Launcher._WebControl; } }
+        public static HotkeyController HotkeyController
+        {
+            get { if(H2Launcher._HotKeyController == null) { H2Launcher._HotKeyController = new HotkeyController(); } return H2Launcher._HotKeyController; }
+            set { H2Launcher._HotKeyController = value; }
+        }
         public static int MapPointer(int Offset)
         {
             //This function needs a home in the future.
@@ -42,22 +48,27 @@ namespace Halo_2_Launcher
         public static async void StartHalo(string Gamertag, string LoginToken, Halo_2_Launcher.Forms.MainForm Form)
         {
             Form.Hide();
+            HotkeyController = new HotkeyController();
+            HotkeyController.Initialize();
             XliveSettings.ProfileName1 = Gamertag;
             XliveSettings.loginToken = LoginToken;
             XliveSettings.SaveSettings();
+           
             LauncherSettings.SaveSettings();
             await Task.Delay(1);
             //File.WriteAllLines(Paths.InstallPath + "token.ini", new string[] { "token=" + LoginToken, "username=" + Gamertag });
             H2Game.RunGame();
             int RunningTicks = 0;
-            while (Process.GetProcessesByName("halo2").Length == 1)
+            /*
+             * Game Running thread ticks every 1 second with a maximum of 15 ticks till reset.
+             * 
+             * */
+            while (Process.GetProcessesByName("halo2").Length == 1)//DURING HALO RUNNING THREAD
             {
-                //DURING HALO RUNNING THREAD
-
-                if (RunningTicks == 15) //Check Ban Status every 15 seconds
+                if (RunningTicks == 15) //Check Ban Status every 15 ticks
                     WebControl.CheckBan(Form, Gamertag, LoginToken);
-               
-                if(RunningTicks == 5) //GameState Check every 5 seconds
+                #region GameStateChecks
+                if(RunningTicks == 5) //GameState Check every 5 ticks
                 {
                     switch (H2Game.GameState)
                     {
@@ -68,12 +79,17 @@ namespace Halo_2_Launcher
                             }
                     }
                 }
+                #endregion
 
+                HotkeyController.ExecuteHotKeys();
+
+                #region TickLogic
                 if (RunningTicks == 15)
                     RunningTicks = 0;
                 else
                     RunningTicks++;
                 await Task.Delay(1000);
+                #endregion
             }
             Form.Show();
         }

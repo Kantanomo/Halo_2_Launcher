@@ -25,6 +25,7 @@ namespace Halo_2_Launcher.Controllers
         private string _RememberToken = "";
         private string _RememberUsername = "";
         private string _LauncherStyle = "Orange";
+        private string _xDelayHotkey = "";
         public int ResolutionWidth
         {
             get { return this._ResolutionWidth; }
@@ -85,7 +86,11 @@ namespace Halo_2_Launcher.Controllers
             get { return this._LauncherStyle; }
             set { this._LauncherStyle = value; }
         }
-
+        public string xDelayHotkey
+        {
+            get { return this._xDelayHotkey; }
+            set { this._xDelayHotkey = value; }
+        }
         private int GetPrimaryMonitor()
         {
             for (int i = 0; i < Screen.AllScreens.Length; i++)
@@ -167,6 +172,11 @@ namespace Halo_2_Launcher.Controllers
                                 this._LauncherStyle = Setting[1];
                                 break;
                             }
+                        case "xDelayHotkey":
+                            {
+                                this._xDelayHotkey = Setting[1];
+                                break;
+                            }
                     }
                 }
             }
@@ -187,6 +197,7 @@ namespace Halo_2_Launcher.Controllers
             SB.AppendLine("RememberToken:" + EncryptStringAES(RememberToken));
             SB.AppendLine("RememberUsername:" + RememberUsername);
             SB.AppendLine("LauncherStyle:" + LauncherStyle);
+            SB.AppendLine("xDelayHotkey:" + xDelayHotkey);
             SW.Write(SB.ToString());
             SW.Flush();
             SW.Close();

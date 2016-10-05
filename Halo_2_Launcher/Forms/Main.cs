@@ -68,6 +68,7 @@ namespace Halo_2_Launcher.Forms
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+
         }
 
         #region Settings
