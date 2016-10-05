@@ -64,22 +64,27 @@
             this.forceUpdateButton = new MetroFramework.Controls.MetroButton();
             this.applyButton = new MetroFramework.Controls.MetroButton();
             this.cancelButton = new MetroFramework.Controls.MetroButton();
+            this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
+            this.metroLabel15 = new MetroFramework.Controls.MetroLabel();
+            this.xDelayCombo = new MetroFramework.Controls.MetroComboBox();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroPanel3.SuspendLayout();
             this.metroPanel2.SuspendLayout();
             this.metroPanel1.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
+            this.metroTabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroTabControl1
             // 
             this.metroTabControl1.Controls.Add(this.metroTabPage1);
             this.metroTabControl1.Controls.Add(this.metroTabPage2);
+            this.metroTabControl1.Controls.Add(this.metroTabPage3);
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControl1.Location = new System.Drawing.Point(20, 60);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 0;
+            this.metroTabControl1.SelectedIndex = 2;
             this.metroTabControl1.Size = new System.Drawing.Size(432, 211);
             this.metroTabControl1.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTabControl1.TabIndex = 0;
@@ -544,6 +549,56 @@
             this.cancelButton.UseSelectable = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
+            // metroTabPage3
+            // 
+            this.metroTabPage3.Controls.Add(this.xDelayCombo);
+            this.metroTabPage3.Controls.Add(this.metroLabel15);
+            this.metroTabPage3.HorizontalScrollbarBarColor = true;
+            this.metroTabPage3.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPage3.HorizontalScrollbarSize = 10;
+            this.metroTabPage3.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPage3.Name = "metroTabPage3";
+            this.metroTabPage3.Size = new System.Drawing.Size(424, 169);
+            this.metroTabPage3.Style = MetroFramework.MetroColorStyle.Blue;
+            this.metroTabPage3.TabIndex = 2;
+            this.metroTabPage3.Text = "Hotkeys";
+            this.metroTabPage3.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroTabPage3.VerticalScrollbarBarColor = true;
+            this.metroTabPage3.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPage3.VerticalScrollbarSize = 10;
+            // 
+            // metroLabel15
+            // 
+            this.metroLabel15.AutoSize = true;
+            this.metroLabel15.Location = new System.Drawing.Point(0, 9);
+            this.metroLabel15.Name = "metroLabel15";
+            this.metroLabel15.Size = new System.Drawing.Size(77, 19);
+            this.metroLabel15.TabIndex = 2;
+            this.metroLabel15.Text = "Skip XDelay";
+            // 
+            // xDelayCombo
+            // 
+            this.xDelayCombo.FormattingEnabled = true;
+            this.xDelayCombo.ItemHeight = 23;
+            this.xDelayCombo.Items.AddRange(new object[] {
+            "CTRL-1",
+            "CTRL-2",
+            "CTRL-3",
+            "CTRL-4",
+            "CTRL-5",
+            "CTRL-6",
+            "CTRL-7",
+            "CTRL-8",
+            "CTRL-9",
+            "CTRL-10"});
+            this.xDelayCombo.Location = new System.Drawing.Point(83, 3);
+            this.xDelayCombo.Name = "xDelayCombo";
+            this.xDelayCombo.Size = new System.Drawing.Size(121, 29);
+            this.xDelayCombo.Style = MetroFramework.MetroColorStyle.Blue;
+            this.xDelayCombo.TabIndex = 3;
+            this.xDelayCombo.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.xDelayCombo.UseSelectable = true;
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -572,6 +627,8 @@
             this.metroPanel1.PerformLayout();
             this.metroTabPage2.ResumeLayout(false);
             this.metroTabPage2.PerformLayout();
+            this.metroTabPage3.ResumeLayout(false);
+            this.metroTabPage3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -613,5 +670,8 @@
         private MetroFramework.Controls.MetroToggle voiceChatToggle;
         private MetroFramework.Controls.MetroTrackBar fieldOfView;
         private MetroFramework.Controls.MetroLabel fovLabel;
+        private MetroFramework.Controls.MetroTabPage metroTabPage3;
+        private MetroFramework.Controls.MetroComboBox xDelayCombo;
+        private MetroFramework.Controls.MetroLabel metroLabel15;
     }
 }

@@ -81,6 +81,7 @@
     <Compile Include="Controllers\AntiCheat\Tags\Weapons.cs" />
     <Compile Include="Controllers\Fun.cs" />
     <Compile Include="Controllers\Game.cs" />
+    <Compile Include="Controllers\Hotkey.cs" />
     <Compile Include="Controllers\Memory.cs" />
     <Compile Include="Controllers\PostLaunch.cs" />
     <Compile Include="Controllers\Registry.cs" />
@@ -109,6 +110,7 @@
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Objects\Enum.cs" />
+    <Compile Include="Objects\HotkeyCollection.cs" />
     <Compile Include="Objects\Paths.cs" />
     <Compile Include="Objects\UpdateCollection.cs" />
     <Compile Include="Program.cs" />
