@@ -333,18 +333,6 @@ namespace Halo_2_Launcher.Controllers
         {
             WriteMem(handle, DllImageAddress(handle, Module) + pOffset, BitConverter.GetBytes(pBytes));
         } //Write Memory Integer Offset -- For Quick Reading
-        public void WriteUInt(int handle, int pOffset, uint pBytes)
-        {
-            WriteMem(handle, pOffset, BitConverter.GetBytes(pBytes));
-        } //Write Memory Integer Offset -- For Quick Reading
-        public void WriteUInt(int handle, bool AddToImageAddress, int pOffset, uint pBytes)
-        {
-            WriteMem(handle, AddToImageAddress, pOffset, BitConverter.GetBytes(pBytes));
-        } //Write Memory Integer Offset -- For Quick Reading
-        public void WriteUInt(int handle, string Module, int pOffset, uint pBytes)
-        {
-            WriteMem(handle, DllImageAddress(handle, Module) + pOffset, BitConverter.GetBytes(pBytes));
-        } //Write Memory Integer Offset -- For Quick Reading
         public void WriteFloat(int handle, int pOffset, float pBytes)
         {
             WriteMem(handle, pOffset, BitConverter.GetBytes(pBytes));

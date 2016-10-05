@@ -42,8 +42,6 @@ namespace Halo_2_Launcher
             this.metroTabControl1.SelectedIndex = 0;
             if (H2Launcher.LauncherSettings.xDelayHotkey != "")
                 this.xDelayCombo.SelectedIndex = this.xDelayCombo.FindStringExact(H2Launcher.LauncherSettings.xDelayHotkey.Trim());
-            if (H2Launcher.LauncherSettings.noHUDHotkey != "")
-                this.noHudCombo.SelectedIndex = this.noHudCombo.FindStringExact(H2Launcher.LauncherSettings.noHUDHotkey.Trim());
             this.Invalidate();
             #endregion
         }
@@ -135,7 +133,6 @@ namespace Halo_2_Launcher
             H2Launcher.XliveSettings.DebugLog = (this.debugLogToggle.Checked) ? 1 : 0;
             H2Launcher.XliveSettings.FPSCap = (this.fpsToggle.Checked) ? 1 : 0;
             H2Launcher.LauncherSettings.xDelayHotkey = this.xDelayCombo.SelectedItem.ToString();
-            H2Launcher.LauncherSettings.noHUDHotkey = this.noHudCombo.SelectedItem.ToString();
             if (!introToggle.Checked)
             {
                 if (!Directory.Exists(Paths.InstallPath + "\\movie.bak"))

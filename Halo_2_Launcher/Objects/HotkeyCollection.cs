@@ -13,7 +13,6 @@ namespace Halo_2_Launcher.Objects
         [DllImport("user32.dll")]
         public static extern short GetKeyState(System.Windows.Forms.Keys nVirtKey);
         private System.Windows.Forms.Keys[] Keys;
-        public bool Triggered = false;
         public HotkeyObject(string Keys)
         {
             string[] SplitKeys = Keys.Split(new string[] { "-" }, StringSplitOptions.RemoveEmptyEntries);
