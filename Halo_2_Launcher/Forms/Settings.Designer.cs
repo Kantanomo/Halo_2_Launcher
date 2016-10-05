@@ -62,11 +62,13 @@
             this.metroLabel12 = new MetroFramework.Controls.MetroLabel();
             this.debugLogToggle = new MetroFramework.Controls.MetroToggle();
             this.forceUpdateButton = new MetroFramework.Controls.MetroButton();
+            this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
+            this.xDelayCombo = new MetroFramework.Controls.MetroComboBox();
+            this.metroLabel15 = new MetroFramework.Controls.MetroLabel();
             this.applyButton = new MetroFramework.Controls.MetroButton();
             this.cancelButton = new MetroFramework.Controls.MetroButton();
-            this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
-            this.metroLabel15 = new MetroFramework.Controls.MetroLabel();
-            this.xDelayCombo = new MetroFramework.Controls.MetroComboBox();
+            this.noHudCombo = new MetroFramework.Controls.MetroComboBox();
+            this.metroLabel16 = new MetroFramework.Controls.MetroLabel();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroPanel3.SuspendLayout();
@@ -529,28 +531,10 @@
             this.forceUpdateButton.UseSelectable = true;
             this.forceUpdateButton.Click += new System.EventHandler(this.forceUpdateButton_Click);
             // 
-            // applyButton
-            // 
-            this.applyButton.Location = new System.Drawing.Point(111, 21);
-            this.applyButton.Name = "applyButton";
-            this.applyButton.Size = new System.Drawing.Size(75, 33);
-            this.applyButton.TabIndex = 1;
-            this.applyButton.Text = "Apply";
-            this.applyButton.UseSelectable = true;
-            this.applyButton.Click += new System.EventHandler(this.applyButton_Click);
-            // 
-            // cancelButton
-            // 
-            this.cancelButton.Location = new System.Drawing.Point(192, 21);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 33);
-            this.cancelButton.TabIndex = 2;
-            this.cancelButton.Text = "Cancel";
-            this.cancelButton.UseSelectable = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
-            // 
             // metroTabPage3
             // 
+            this.metroTabPage3.Controls.Add(this.noHudCombo);
+            this.metroTabPage3.Controls.Add(this.metroLabel16);
             this.metroTabPage3.Controls.Add(this.xDelayCombo);
             this.metroTabPage3.Controls.Add(this.metroLabel15);
             this.metroTabPage3.HorizontalScrollbarBarColor = true;
@@ -566,15 +550,6 @@
             this.metroTabPage3.VerticalScrollbarBarColor = true;
             this.metroTabPage3.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage3.VerticalScrollbarSize = 10;
-            // 
-            // metroLabel15
-            // 
-            this.metroLabel15.AutoSize = true;
-            this.metroLabel15.Location = new System.Drawing.Point(0, 9);
-            this.metroLabel15.Name = "metroLabel15";
-            this.metroLabel15.Size = new System.Drawing.Size(77, 19);
-            this.metroLabel15.TabIndex = 2;
-            this.metroLabel15.Text = "Skip XDelay";
             // 
             // xDelayCombo
             // 
@@ -598,6 +573,67 @@
             this.xDelayCombo.TabIndex = 3;
             this.xDelayCombo.Theme = MetroFramework.MetroThemeStyle.Light;
             this.xDelayCombo.UseSelectable = true;
+            // 
+            // metroLabel15
+            // 
+            this.metroLabel15.AutoSize = true;
+            this.metroLabel15.Location = new System.Drawing.Point(0, 9);
+            this.metroLabel15.Name = "metroLabel15";
+            this.metroLabel15.Size = new System.Drawing.Size(77, 19);
+            this.metroLabel15.TabIndex = 2;
+            this.metroLabel15.Text = "Skip XDelay";
+            // 
+            // applyButton
+            // 
+            this.applyButton.Location = new System.Drawing.Point(111, 21);
+            this.applyButton.Name = "applyButton";
+            this.applyButton.Size = new System.Drawing.Size(75, 33);
+            this.applyButton.TabIndex = 1;
+            this.applyButton.Text = "Apply";
+            this.applyButton.UseSelectable = true;
+            this.applyButton.Click += new System.EventHandler(this.applyButton_Click);
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(192, 21);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 33);
+            this.cancelButton.TabIndex = 2;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseSelectable = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
+            // noHudCombo
+            // 
+            this.noHudCombo.FormattingEnabled = true;
+            this.noHudCombo.ItemHeight = 23;
+            this.noHudCombo.Items.AddRange(new object[] {
+            "CTRL-1",
+            "CTRL-2",
+            "CTRL-3",
+            "CTRL-4",
+            "CTRL-5",
+            "CTRL-6",
+            "CTRL-7",
+            "CTRL-8",
+            "CTRL-9",
+            "CTRL-10"});
+            this.noHudCombo.Location = new System.Drawing.Point(83, 38);
+            this.noHudCombo.Name = "noHudCombo";
+            this.noHudCombo.Size = new System.Drawing.Size(121, 29);
+            this.noHudCombo.Style = MetroFramework.MetroColorStyle.Blue;
+            this.noHudCombo.TabIndex = 5;
+            this.noHudCombo.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.noHudCombo.UseSelectable = true;
+            // 
+            // metroLabel16
+            // 
+            this.metroLabel16.AutoSize = true;
+            this.metroLabel16.Location = new System.Drawing.Point(0, 44);
+            this.metroLabel16.Name = "metroLabel16";
+            this.metroLabel16.Size = new System.Drawing.Size(58, 19);
+            this.metroLabel16.TabIndex = 4;
+            this.metroLabel16.Text = "No HUD";
             // 
             // Settings
             // 
@@ -673,5 +709,7 @@
         private MetroFramework.Controls.MetroTabPage metroTabPage3;
         private MetroFramework.Controls.MetroComboBox xDelayCombo;
         private MetroFramework.Controls.MetroLabel metroLabel15;
+        private MetroFramework.Controls.MetroComboBox noHudCombo;
+        private MetroFramework.Controls.MetroLabel metroLabel16;
     }
 }

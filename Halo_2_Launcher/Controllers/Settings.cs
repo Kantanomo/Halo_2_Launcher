@@ -26,6 +26,7 @@ namespace Halo_2_Launcher.Controllers
         private string _RememberUsername = "";
         private string _LauncherStyle = "Orange";
         private string _xDelayHotkey = "";
+        private string _noHUDHotkey = "";
         public int ResolutionWidth
         {
             get { return this._ResolutionWidth; }
@@ -77,7 +78,7 @@ namespace Halo_2_Launcher.Controllers
             set { this._RememberToken = value; }
         }
         public string RememberUsername
-        { 
+        {
             get { return this._RememberUsername; }
             set { this._RememberUsername = value; }
         }
@@ -90,6 +91,11 @@ namespace Halo_2_Launcher.Controllers
         {
             get { return this._xDelayHotkey; }
             set { this._xDelayHotkey = value; }
+        }
+        public string noHUDHotkey
+        {
+            get { return this._noHUDHotkey; }
+            set { this._noHUDHotkey = value; }
         }
         private int GetPrimaryMonitor()
         {
@@ -177,6 +183,11 @@ namespace Halo_2_Launcher.Controllers
                                 this._xDelayHotkey = Setting[1];
                                 break;
                             }
+                        case "noHudHotkey":
+                            {
+                                this._noHUDHotkey = Setting[1];
+                                break;
+                            }
                     }
                 }
             }
@@ -198,11 +209,12 @@ namespace Halo_2_Launcher.Controllers
             SB.AppendLine("RememberUsername:" + RememberUsername);
             SB.AppendLine("LauncherStyle:" + LauncherStyle);
             SB.AppendLine("xDelayHotkey:" + xDelayHotkey);
+            SB.AppendLine("noHudHotkey:" + noHUDHotkey);
             SW.Write(SB.ToString());
             SW.Flush();
             SW.Close();
             SW.Dispose();
-            
+
         }
         private byte[] _salt = Encoding.ASCII.GetBytes("GIVEITTOMEDICK");
         private string EncryptStringAES(string plainText)
