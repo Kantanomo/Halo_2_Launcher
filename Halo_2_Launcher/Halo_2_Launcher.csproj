@@ -110,7 +110,7 @@
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Objects\Enum.cs" />
-    <Compile Include="Objects\HotkeyCollection.cs" />
+    <Compile Include="Objects\HotkeyObject.cs" />
     <Compile Include="Objects\Paths.cs" />
     <Compile Include="Objects\UpdateCollection.cs" />
     <Compile Include="Program.cs" />
