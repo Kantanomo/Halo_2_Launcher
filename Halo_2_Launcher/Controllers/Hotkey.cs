@@ -13,6 +13,7 @@ namespace Halo_2_Launcher.Controllers
     public class HotkeyController
     {
         private HotkeyObject xDelayHotkey;
+        private HotkeyObject noHudHotkey;
         public HotkeyController()
         {
             
@@ -21,6 +22,8 @@ namespace Halo_2_Launcher.Controllers
         {
             if (H2Launcher.LauncherSettings.xDelayHotkey != "")
                 this.xDelayHotkey = new HotkeyObject(H2Launcher.LauncherSettings.xDelayHotkey);
+            if (H2Launcher.LauncherSettings.noHUDHotkey != "")
+                this.noHudHotkey = new HotkeyObject(H2Launcher.LauncherSettings.noHUDHotkey);
         }
         public async void ExecuteHotKeys()
         {
@@ -34,6 +37,18 @@ namespace Halo_2_Launcher.Controllers
                                 if(this.xDelayHotkey.Pressed())
                                 for (int i = 0; i < 10; i++)
                                     H2Launcher.Memory.WriteByte(0, true, 0x0050A3B8, 0);
+                            break;
+                        }
+                    case H2GameState.ingame:
+                        {
+                        if (this.noHudHotkey != null)
+                                if (this.noHudHotkey.Pressed())
+                                {
+                                    H2Launcher.Memory.WriteByte(0, true, 0x2228F8, (byte)((this.noHudHotkey.Triggered) ? 0x84 : 0x85));
+                                    H2Launcher.Memory.WriteByte(0, true, 0x222311, (byte)((this.noHudHotkey.Triggered) ? 0x84 : 0x85));
+                                    H2Launcher.Memory.WriteUInt(0, false, H2Launcher.MapPointer(0xD8C5BC), ((this.noHudHotkey.Triggered) ? 0xF0E3367D : 0xFFFFFFFF));
+                                    this.noHudHotkey.Triggered = !this.noHudHotkey.Triggered;
+                                }
                             break;
                         }
                 }
