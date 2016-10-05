@@ -29,4 +29,13 @@ namespace Halo_2_Launcher.Objects
         RegisterUsernameInvalid = 41,
         RegisterUsernameFailed = 42,
     }
+    public enum H2GameState : byte
+    {
+        lobby = 1,
+        Starting = 2,
+        ingame = 3,
+        joining = 4,
+        matchmaking = 5,
+        unknown = 0
+    }
 }

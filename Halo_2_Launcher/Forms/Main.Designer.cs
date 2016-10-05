@@ -68,6 +68,7 @@
             this.passwordTextBox.TabIndex = 2;
             this.passwordTextBox.Theme = MetroFramework.MetroThemeStyle.Light;
             this.passwordTextBox.UseSelectable = true;
+            this.passwordTextBox.Click += new System.EventHandler(this.passwordTextBox_Click);
             // 
             // metroLabel2
             // 
@@ -97,6 +98,7 @@
             this.usernameTextBox.TabIndex = 1;
             this.usernameTextBox.Theme = MetroFramework.MetroThemeStyle.Light;
             this.usernameTextBox.UseSelectable = true;
+            this.usernameTextBox.Click += new System.EventHandler(this.usernameTextBox_Click);
             // 
             // metroLabel1
             // 

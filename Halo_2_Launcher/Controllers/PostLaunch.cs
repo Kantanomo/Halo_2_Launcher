@@ -61,9 +61,9 @@ namespace Halo_2_Launcher.Controllers
                             SetWindowBorderless();
                             break;
                         }
-                    case "SetXboxFOV":
+                    case "SetFOV":
                         {
-                            H2Launcher.H2Game.SetXboxFOV();
+                            H2Launcher.H2Game.SetFieldOfView();
                             break;
                         }
                     case "CrashFix":

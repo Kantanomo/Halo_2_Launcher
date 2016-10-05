@@ -84,6 +84,7 @@
     <Compile Include="Controllers\Memory.cs" />
     <Compile Include="Controllers\PostLaunch.cs" />
     <Compile Include="Controllers\Registry.cs" />
+    <Compile Include="Controllers\Security.cs" />
     <Compile Include="Controllers\Settings.cs" />
     <Compile Include="Controllers\Tags\Properties\Float.cs" />
     <Compile Include="Controllers\Tags\TagBase.cs" />

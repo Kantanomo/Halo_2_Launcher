@@ -11,6 +11,8 @@ using MetroFramework.Forms;
 using System.Runtime.InteropServices;
 using Halo_2_Launcher.Controllers;
 using Halo_2_Launcher.Objects;
+using MetroFramework;
+
 namespace Halo_2_Launcher.Forms
 {
     public partial class MainForm : MetroForm
@@ -87,28 +89,40 @@ namespace Halo_2_Launcher.Forms
 
         private void registerButton_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(@"http://cartographer.online/");
-            //if(this.RegisterMode == false)
-            //{
-            //    this.metroLabel3.Visible = true;
-            //    this.emailTextBox1.Visible = true;
-            //    this.registerButton.Width = 285;
-            //    this.registerButton.Location = new System.Drawing.Point(23, 172);
-            //    this.emailTextBox1.Text = "";
-            //    this.usernameTextBox.Text = "";
-            //    this.passwordTextBox.Text = "";
-            //    this.RegisterMode = true;
-            //    this.Invalidate();
-            //} else if (this.RegisterMode == true)
-            //{
-            //    this.metroLabel3.Visible = false;
-            //    this.emailTextBox1.Visible = false;
-            //    this.registerButton.Width = 86;
-            //    this.registerButton.Location = new System.Drawing.Point(222, 172);
-            //    this.RegisterMode = false;
-            //    this.Invalidate();
-            //    //H2Launcher.WebControl.Register(this, this.usernameTextBox.Text, this.passwordTextBox.Text);
-            //}
+            //System.Diagnostics.Process.Start(@"http://cartographer.online/");
+            if (this.RegisterMode == false)
+            {
+                this.usernameTextBox.Focus();
+                this.metroLabel3.Visible = true;
+                this.emailTextBox1.Visible = true;
+                this.registerButton.Width = 285;
+                this.registerButton.Location = new System.Drawing.Point(23, 172);
+                this.emailTextBox1.Text = "";
+                this.usernameTextBox.Text = "";
+                this.passwordTextBox.Text = "";
+                this.RegisterMode = true;
+                this.Invalidate();
+            }
+            else if (this.RegisterMode == true)
+            {
+                this.metroLabel3.Visible = false;
+                this.emailTextBox1.Visible = false;
+                this.registerButton.Width = 83;
+                this.registerButton.Location = new System.Drawing.Point(144, 172);
+                this.RegisterMode = false;
+                this.Invalidate();
+                this.usernameTextBox.Focus();
+                if (H2Launcher.WebControl.Register(this, this.usernameTextBox.Text, this.passwordTextBox.Text, this.emailTextBox1.Text))
+                {
+                    MetroMessageBox.Show(this, "Account created", Fun.GoIdioms, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MetroMessageBox.Show(this, "Account created failed\r\nOpening the web registration page instead.", Fun.GoIdioms, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    System.Diagnostics.Process.Start(@"http://cartographer.online/");
+                }
+                //H2Launcher.WebControl.Register(this, this.usernameTextBox.Text, this.passwordTextBox.Text);
+            }
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -126,6 +140,25 @@ namespace Halo_2_Launcher.Forms
         {
             this.Text = Fun.PauseIdiomGenerator;
             this.Invalidate();
+        }
+
+        private void usernameTextBox_Click(object sender, EventArgs e)
+        {
+            if (!this.RegisterMode)
+            {
+                if (H2Launcher.XliveSettings.loginToken != "")
+                    H2Launcher.XliveSettings.loginToken = "";
+                if (this.passwordTextBox.Text != "")
+                    this.passwordTextBox.Text = "";
+            }
+        }
+        private void passwordTextBox_Click(object sender, EventArgs e)
+        {
+            if (!this.RegisterMode)
+            {
+                if (H2Launcher.XliveSettings.loginToken != "")
+                    H2Launcher.XliveSettings.loginToken = "";
+            }
         }
     }
 }

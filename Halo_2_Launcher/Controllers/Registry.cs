@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace Halo_2_Launcher.Controllers
 {
@@ -23,15 +24,36 @@ namespace Halo_2_Launcher.Controllers
         }
         public static int GetScreenResX()
         {
-            return (int)GetVideoSetting("ScreenResX");
+            try
+            {
+                return (int)GetVideoSetting("ScreenResX");
+            }
+            catch (Exception)
+            {
+                return (int)Screen.PrimaryScreen.Bounds.Width;
+            }
         }
         public static int GetScreenResY()
         {
-            return (int)GetVideoSetting("ScreenResY");
+            try
+            {
+                return (int)GetVideoSetting("ScreenResY");
+            }
+            catch (Exception)
+            {
+                return (int)Screen.PrimaryScreen.Bounds.Height;
+            }
         }
-        public static H2DisplayMode  GetDisplayMode()
+        public static H2DisplayMode GetDisplayMode()
         {
-            return (((int)GetVideoSetting("DisplayMode") == 1) ? H2DisplayMode.Windowed : H2DisplayMode.Fullscreen);
+            try
+            {
+                return (((int)GetVideoSetting("DisplayMode") == 1) ? H2DisplayMode.Windowed : H2DisplayMode.Fullscreen);
+            }
+            catch (Exception)
+            {
+                return H2DisplayMode.Windowed;
+            }
         }
         private static void SetVideoSetting(string Setting, object Value)
         {

@@ -9,18 +9,45 @@ using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Halo_2_Launcher.Controllers
 {
     public class WebHandler
     {
-        private string Api = "http://cartographer.online/api.php";
+        private string Api = "http://cartographer.online/new_api.php";
+        public void CheckBan(Halo_2_Launcher.Forms.MainForm Form, string username, string rememberToken)
+        {
+            var pairs = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("launcher", "1"),
+                new KeyValuePair<string, string>("serial", Security.GetHardDriveSerial())
+            };
+            pairs.Add(new KeyValuePair<string, string>("token", rememberToken));
+            var content = new FormUrlEncodedContent(pairs);
+            using (var client = new HttpClient())
+            {
+                var response = client.PostAsync(Api, content).Result;
+                var contentString = response.Content.ReadAsStringAsync().Result;
+                if (contentString == "banned")
+                {
+                    H2Launcher.H2Game.KillGame();
+                    Form.BringToFront();
+                    if (MetroMessageBox.Show(Form, "You have been banned, please visit the forum to appeal your ban.\r\nWould you like us to open the forums for you?.", Fun.PauseIdiomGenerator, System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Error) == DialogResult.Yes)
+                    {
+                        System.Diagnostics.Process.Start(@"http://www.halo2vista.com/forums/");
+                    }
+                }
+            }
+            
+        }
         public bool Login(Halo_2_Launcher.Forms.MainForm Form, string username, string password, string rememberToken = "")
         {
             var pairs = new List<KeyValuePair<string, string>>
               {
-                new KeyValuePair<string, string>("launcher", "1")
-              };
+                new KeyValuePair<string, string>("launcher", "1"),
+                new KeyValuePair<string, string>("serial", Security.GetHardDriveSerial())
+        };
 
             if (rememberToken != "")
                 pairs.Add(new KeyValuePair<string, string>("token", rememberToken));
@@ -28,6 +55,7 @@ namespace Halo_2_Launcher.Controllers
             {
                 pairs.Add(new KeyValuePair<string, string>("user", username));
                 pairs.Add(new KeyValuePair<string, string>("pass", password));
+                
             }
             var content = new FormUrlEncodedContent(pairs);
             using (var client = new HttpClient())
@@ -42,7 +70,14 @@ namespace Halo_2_Launcher.Controllers
                         H2Launcher.XliveSettings.loginToken = "";
                         return false;
                     }
-                    if(contentString == "1")
+                    else if (contentString == "banned")
+                    {
+                        if (MetroMessageBox.Show(Form, "You have been banned, please visit the forum to appeal your ban.\r\nWould you like us to open the forums for you?.", Fun.PauseIdiomGenerator, System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Error) == DialogResult.Yes)
+                        {
+                            System.Diagnostics.Process.Start(@"http://www.halo2vista.com/forums/");
+                        }
+                    }
+                    else if(contentString == "1")
                     {
                         H2Launcher.LauncherSettings.RememberUsername = username;
                         H2Launcher.StartHalo(username, rememberToken, Form);
@@ -55,6 +90,13 @@ namespace Halo_2_Launcher.Controllers
                     {
                         MetroMessageBox.Show(Form, "The username or password entered is either incorrect or invalid.\r\nPlease try again.", Fun.PauseIdiomGenerator, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Warning);
                         return false;
+                    }
+                    else if(contentString == "banned")
+                    {
+                        if(MetroMessageBox.Show(Form, "You have been banned, please visit the forum to appeal your ban.\r\nWould you like us to open the forums for you?.", Fun.PauseIdiomGenerator, System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Error) == DialogResult.Yes)
+                        {
+                            System.Diagnostics.Process.Start(@"http://www.halo2vista.com/forums/");
+                        }
                     }
                     else if(contentString.Length == 32) //login successful
                     {
@@ -80,7 +122,7 @@ namespace Halo_2_Launcher.Controllers
             {
                 var response = client.PostAsync(Api, content).Result;
                 var contentString = response.Content.ReadAsStringAsync().Result;
-                return (contentString == "0") ? true : false;
+                return (contentString == "1") ? true : false;
             }
         }
     }

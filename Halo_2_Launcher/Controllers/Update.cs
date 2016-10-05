@@ -22,20 +22,16 @@ namespace Halo_2_Launcher.Controllers
         private UpdateCollection _LocalUpdateCollection;
         private UpdateCollection _UpdateCollection;
         private volatile bool _LauncherUpdated = false; //Flags the launcher to need a restart, to replace the current version with H2Launcher_temp.exe
-        private volatile bool _RunUpdates = false;
-        private volatile bool _Finished = false;
-        private volatile bool _RemoteLoaded = false;
-        private volatile bool _LocalLoaded = false;
         private Halo_2_Launcher.Forms.Update _Form;
         private volatile string _Halo2Version = "1.00.00.11122";
         public UpdateController(Halo_2_Launcher.Forms.Update Form)
         {
             this._Form = Form;
         }
-        public void LoadRemoteUpdateCollection()
+        public bool LoadRemoteUpdateCollection()
         {
-            //try
-            //{
+            try
+            {
                 this._Form.AddToDetails("Downloading remote update XML file....");
                 if (File.Exists(Paths.Files + "RemoteUpdate.xml")) File.Delete(Paths.Files + "RemoteUpdate.xml");
                 WebClient Client = new WebClient();
@@ -81,12 +77,17 @@ namespace Halo_2_Launcher.Controllers
                     tUpdateColleciton.AddObject((UpdateObject)UO);
                 }
                 _RemoteUpdateCollection = tUpdateColleciton;
-                this._RemoteLoaded = true;
-            //}
-            //catch (Exception) { throw new Exception("Error downloading remote update xml"); }
+                return true;
+
+            }
+            catch (Exception)
+            {
+                this._Form.AddToDetails("There was an issue loading the remote updates, try restarting. You can play the game normally still.");
+                return false;
+            }
         }
 
-        public void LoadLocalUpdateCollection()
+        public bool LoadLocalUpdateCollection()
         {
             try
             {
@@ -112,36 +113,63 @@ namespace Halo_2_Launcher.Controllers
                             tUpdateColleciton.AddObject((UpdateObject)UO);
                     }
                     _LocalUpdateCollection = tUpdateColleciton;
-                    this._LocalLoaded = true;
+                    return true;
                 }
                 else
                 {
-                    this._LocalLoaded = true;
+                    return true;
                 }
             }
-            catch (Exception) { throw new Exception("Error loading local update xml"); }
+            catch (Exception)
+            {
+                this._Form.AddToDetails("There was an issue loading the local updates, try restarting. You can play the game normally still.");
+                return false;
+            }
         }
         public async void CheckUpdates()
         {
             CheckInstallPath();
             await Task.Run(() =>
             {
-                UpdateGameToLatest();
-                LoadLocalUpdateCollection();
-                LoadRemoteUpdateCollection();
-                bool Update = NeedToUpdate();
-                if (Update)
+                if (UpdateGameToLatest())
                 {
-                    DownloadUpdates();
-                    this._Form.AddToDetails("Updates Complete");
-                    Task.Delay(1000);
-                    Finished();
+                    if (LoadLocalUpdateCollection())
+                    {
+                        if (LoadRemoteUpdateCollection())
+                        {
+                            if (NeedToUpdate())
+                            {
+                                DownloadUpdates();
+                                this._Form.AddToDetails("Updates Complete");
+                                Task.Delay(1000);
+                                Finished();
+                            }
+                            else
+                            {
+                                this._Form.AddToDetails("No Updates found.");
+                                Task.Delay(1000);
+                                this._Form.UpdaterFinished();
+                            }
+                        }
+                        else
+                        {
+                            this._Form.AddToDetails("Update Failed");
+                            Task.Delay(1000);
+                            Finished();
+                        }
+                    }
+                    else
+                    {
+                        this._Form.AddToDetails("Update Failed");
+                        Task.Delay(1000);
+                        Finished();
+                    }
                 }
                 else
                 {
-                    this._Form.AddToDetails("No Updates found.");
+                    this._Form.AddToDetails("Update Failed");
                     Task.Delay(1000);
-                    this._Form.UpdaterFinished();
+                    Finished();
                 }
             });
         }
@@ -164,10 +192,14 @@ namespace Halo_2_Launcher.Controllers
                     {
                         Paths.InstallPath = ofd.FileName.Replace(ofd.SafeFileName, "");
                     }
+                    else
+                    {
+                        CheckInstallPath();
+                    }
                 }
             }
         }
-        private void UpdateGameToLatest()
+        private bool UpdateGameToLatest()
         {
             string CurrentHalo2Version = FileVersionInfo.GetVersionInfo(Paths.InstallPath + "halo2.exe").FileVersion;
             this._Form.AddToDetails(string.Format("Halo 2 Version Current Version: {0} Expected Version {1}", CurrentHalo2Version, this._Halo2Version));
@@ -203,7 +235,10 @@ namespace Halo_2_Launcher.Controllers
                     if (Process.GetProcessesByName("Update").Length == 0)
                         _isUpdating = false;
                 }
+                File.Delete(Paths.Downloads + "\\Update.exe");
+                return true;
             }
+            return true;
         }
         private bool NeedToUpdate()
         {
@@ -219,9 +254,9 @@ namespace Halo_2_Launcher.Controllers
                         _UpdateCollection.AddObject(UO);
                     else if (tUO.localpath != UO.localpath)
                         MoveFile(tUO.name, tUO.localpath, UO.localpath);
+
                 }
             }
-            bool ssd = this._RemoteLoaded;
             this._UpdateCollection = (this._UpdateCollection != null) ? this._UpdateCollection : this._RemoteUpdateCollection;
             if (this._UpdateCollection.Count > 0)
                 return true;
@@ -259,8 +294,6 @@ namespace Halo_2_Launcher.Controllers
                 catch (Exception) { throw new Exception("Error"); }
                 //DownloadFile(tUO.remotepath, tUO.localpath);
                 while (_isDownloading) { }
-                if (i == this._UpdateCollection.Count - 1)
-                    _Finished = true;
             }
         }
         //public void 

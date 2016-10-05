@@ -33,7 +33,8 @@
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
             this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
             this.metroPanel3 = new MetroFramework.Controls.MetroPanel();
-            this.xboxFOVToggle = new MetroFramework.Controls.MetroToggle();
+            this.fovLabel = new MetroFramework.Controls.MetroLabel();
+            this.fieldOfView = new MetroFramework.Controls.MetroTrackBar();
             this.introToggle = new MetroFramework.Controls.MetroToggle();
             this.soundToggle = new MetroFramework.Controls.MetroToggle();
             this.vsyncToggle = new MetroFramework.Controls.MetroToggle();
@@ -54,15 +55,15 @@
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.widthTextBox = new MetroFramework.Controls.MetroTextBox();
             this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
+            this.metroLabel14 = new MetroFramework.Controls.MetroLabel();
+            this.voiceChatToggle = new MetroFramework.Controls.MetroToggle();
+            this.metroLabel13 = new MetroFramework.Controls.MetroLabel();
+            this.fpsToggle = new MetroFramework.Controls.MetroToggle();
+            this.metroLabel12 = new MetroFramework.Controls.MetroLabel();
+            this.debugLogToggle = new MetroFramework.Controls.MetroToggle();
             this.forceUpdateButton = new MetroFramework.Controls.MetroButton();
             this.applyButton = new MetroFramework.Controls.MetroButton();
             this.cancelButton = new MetroFramework.Controls.MetroButton();
-            this.debugLogToggle = new MetroFramework.Controls.MetroToggle();
-            this.metroLabel12 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel13 = new MetroFramework.Controls.MetroLabel();
-            this.fpsToggle = new MetroFramework.Controls.MetroToggle();
-            this.metroLabel14 = new MetroFramework.Controls.MetroLabel();
-            this.voiceChatToggle = new MetroFramework.Controls.MetroToggle();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroPanel3.SuspendLayout();
@@ -78,7 +79,7 @@
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControl1.Location = new System.Drawing.Point(20, 60);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 1;
+            this.metroTabControl1.SelectedIndex = 0;
             this.metroTabControl1.Size = new System.Drawing.Size(432, 211);
             this.metroTabControl1.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTabControl1.TabIndex = 0;
@@ -121,7 +122,8 @@
             // metroPanel3
             // 
             this.metroPanel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.metroPanel3.Controls.Add(this.xboxFOVToggle);
+            this.metroPanel3.Controls.Add(this.fovLabel);
+            this.metroPanel3.Controls.Add(this.fieldOfView);
             this.metroPanel3.Controls.Add(this.introToggle);
             this.metroPanel3.Controls.Add(this.soundToggle);
             this.metroPanel3.Controls.Add(this.vsyncToggle);
@@ -142,18 +144,31 @@
             this.metroPanel3.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanel3.VerticalScrollbarSize = 10;
             // 
-            // xboxFOVToggle
+            // fovLabel
             // 
-            this.xboxFOVToggle.AutoSize = true;
-            this.xboxFOVToggle.FontSize = MetroFramework.MetroLinkSize.Medium;
-            this.xboxFOVToggle.Location = new System.Drawing.Point(219, 43);
-            this.xboxFOVToggle.Name = "xboxFOVToggle";
-            this.xboxFOVToggle.Size = new System.Drawing.Size(80, 17);
-            this.xboxFOVToggle.Style = MetroFramework.MetroColorStyle.Blue;
-            this.xboxFOVToggle.TabIndex = 8;
-            this.xboxFOVToggle.Text = "Off";
-            this.xboxFOVToggle.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.xboxFOVToggle.UseSelectable = true;
+            this.fovLabel.AutoSize = true;
+            this.fovLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.fovLabel.Location = new System.Drawing.Point(308, 38);
+            this.fovLabel.Name = "fovLabel";
+            this.fovLabel.Size = new System.Drawing.Size(23, 19);
+            this.fovLabel.Style = MetroFramework.MetroColorStyle.Black;
+            this.fovLabel.TabIndex = 11;
+            this.fovLabel.Text = "90";
+            this.fovLabel.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.fovLabel.UseStyleColors = true;
+            // 
+            // fieldOfView
+            // 
+            this.fieldOfView.BackColor = System.Drawing.Color.Transparent;
+            this.fieldOfView.Location = new System.Drawing.Point(227, 37);
+            this.fieldOfView.Maximum = 90;
+            this.fieldOfView.Minimum = 50;
+            this.fieldOfView.Name = "fieldOfView";
+            this.fieldOfView.Size = new System.Drawing.Size(75, 23);
+            this.fieldOfView.TabIndex = 10;
+            this.fieldOfView.Text = "metroTrackBar1";
+            this.fieldOfView.Value = 70;
+            this.fieldOfView.Scroll += new System.Windows.Forms.ScrollEventHandler(this.fieldOfView_Scroll);
             // 
             // introToggle
             // 
@@ -199,10 +214,10 @@
             this.metroLabel10.AutoSize = true;
             this.metroLabel10.Location = new System.Drawing.Point(141, 42);
             this.metroLabel10.Name = "metroLabel10";
-            this.metroLabel10.Size = new System.Drawing.Size(72, 19);
+            this.metroLabel10.Size = new System.Drawing.Size(38, 19);
             this.metroLabel10.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroLabel10.TabIndex = 9;
-            this.metroLabel10.Text = "Xbox FOV:";
+            this.metroLabel10.Text = "FOV:";
             this.metroLabel10.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
             // metroLabel11
@@ -434,6 +449,71 @@
             this.metroTabPage2.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage2.VerticalScrollbarSize = 10;
             // 
+            // metroLabel14
+            // 
+            this.metroLabel14.AutoSize = true;
+            this.metroLabel14.Location = new System.Drawing.Point(3, 46);
+            this.metroLabel14.Name = "metroLabel14";
+            this.metroLabel14.Size = new System.Drawing.Size(74, 19);
+            this.metroLabel14.TabIndex = 10;
+            this.metroLabel14.Text = "Voice Chat:";
+            this.metroLabel14.Visible = false;
+            // 
+            // voiceChatToggle
+            // 
+            this.voiceChatToggle.AutoSize = true;
+            this.voiceChatToggle.Location = new System.Drawing.Point(83, 48);
+            this.voiceChatToggle.Name = "voiceChatToggle";
+            this.voiceChatToggle.Size = new System.Drawing.Size(80, 17);
+            this.voiceChatToggle.Style = MetroFramework.MetroColorStyle.Blue;
+            this.voiceChatToggle.TabIndex = 9;
+            this.voiceChatToggle.Text = "Off";
+            this.voiceChatToggle.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.voiceChatToggle.UseSelectable = true;
+            this.voiceChatToggle.Visible = false;
+            // 
+            // metroLabel13
+            // 
+            this.metroLabel13.AutoSize = true;
+            this.metroLabel13.Location = new System.Drawing.Point(3, 23);
+            this.metroLabel13.Name = "metroLabel13";
+            this.metroLabel13.Size = new System.Drawing.Size(79, 19);
+            this.metroLabel13.TabIndex = 8;
+            this.metroLabel13.Text = "FPS Limiter:";
+            // 
+            // fpsToggle
+            // 
+            this.fpsToggle.AutoSize = true;
+            this.fpsToggle.Location = new System.Drawing.Point(83, 25);
+            this.fpsToggle.Name = "fpsToggle";
+            this.fpsToggle.Size = new System.Drawing.Size(80, 17);
+            this.fpsToggle.Style = MetroFramework.MetroColorStyle.Blue;
+            this.fpsToggle.TabIndex = 7;
+            this.fpsToggle.Text = "Off";
+            this.fpsToggle.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.fpsToggle.UseSelectable = true;
+            // 
+            // metroLabel12
+            // 
+            this.metroLabel12.AutoSize = true;
+            this.metroLabel12.Location = new System.Drawing.Point(3, 0);
+            this.metroLabel12.Name = "metroLabel12";
+            this.metroLabel12.Size = new System.Drawing.Size(77, 19);
+            this.metroLabel12.TabIndex = 6;
+            this.metroLabel12.Text = "Debug Log:";
+            // 
+            // debugLogToggle
+            // 
+            this.debugLogToggle.AutoSize = true;
+            this.debugLogToggle.Location = new System.Drawing.Point(83, 2);
+            this.debugLogToggle.Name = "debugLogToggle";
+            this.debugLogToggle.Size = new System.Drawing.Size(80, 17);
+            this.debugLogToggle.Style = MetroFramework.MetroColorStyle.Blue;
+            this.debugLogToggle.TabIndex = 5;
+            this.debugLogToggle.Text = "Off";
+            this.debugLogToggle.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.debugLogToggle.UseSelectable = true;
+            // 
             // forceUpdateButton
             // 
             this.forceUpdateButton.Location = new System.Drawing.Point(3, 134);
@@ -463,71 +543,6 @@
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseSelectable = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
-            // 
-            // debugLogToggle
-            // 
-            this.debugLogToggle.AutoSize = true;
-            this.debugLogToggle.Location = new System.Drawing.Point(83, 2);
-            this.debugLogToggle.Name = "debugLogToggle";
-            this.debugLogToggle.Size = new System.Drawing.Size(80, 17);
-            this.debugLogToggle.Style = MetroFramework.MetroColorStyle.Blue;
-            this.debugLogToggle.TabIndex = 5;
-            this.debugLogToggle.Text = "Off";
-            this.debugLogToggle.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.debugLogToggle.UseSelectable = true;
-            // 
-            // metroLabel12
-            // 
-            this.metroLabel12.AutoSize = true;
-            this.metroLabel12.Location = new System.Drawing.Point(3, 0);
-            this.metroLabel12.Name = "metroLabel12";
-            this.metroLabel12.Size = new System.Drawing.Size(77, 19);
-            this.metroLabel12.TabIndex = 6;
-            this.metroLabel12.Text = "Debug Log:";
-            // 
-            // metroLabel13
-            // 
-            this.metroLabel13.AutoSize = true;
-            this.metroLabel13.Location = new System.Drawing.Point(3, 23);
-            this.metroLabel13.Name = "metroLabel13";
-            this.metroLabel13.Size = new System.Drawing.Size(79, 19);
-            this.metroLabel13.TabIndex = 8;
-            this.metroLabel13.Text = "FPS Limiter:";
-            // 
-            // fpsToggle
-            // 
-            this.fpsToggle.AutoSize = true;
-            this.fpsToggle.Location = new System.Drawing.Point(83, 25);
-            this.fpsToggle.Name = "fpsToggle";
-            this.fpsToggle.Size = new System.Drawing.Size(80, 17);
-            this.fpsToggle.Style = MetroFramework.MetroColorStyle.Blue;
-            this.fpsToggle.TabIndex = 7;
-            this.fpsToggle.Text = "Off";
-            this.fpsToggle.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.fpsToggle.UseSelectable = true;
-            // 
-            // metroLabel14
-            // 
-            this.metroLabel14.AutoSize = true;
-            this.metroLabel14.Location = new System.Drawing.Point(3, 46);
-            this.metroLabel14.Name = "metroLabel14";
-            this.metroLabel14.Size = new System.Drawing.Size(74, 19);
-            this.metroLabel14.TabIndex = 10;
-            this.metroLabel14.Text = "Voice Chat:";
-            this.metroLabel14.Visible = false;
-            // 
-            // voiceChatToggle
-            // 
-            this.voiceChatToggle.AutoSize = true;
-            this.voiceChatToggle.Location = new System.Drawing.Point(83, 48);
-            this.voiceChatToggle.Name = "voiceChatToggle";
-            this.voiceChatToggle.Size = new System.Drawing.Size(80, 17);
-            this.voiceChatToggle.Style = MetroFramework.MetroColorStyle.Blue;
-            this.voiceChatToggle.TabIndex = 9;
-            this.voiceChatToggle.Text = "Off";
-            this.voiceChatToggle.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.voiceChatToggle.UseSelectable = true;
-            this.voiceChatToggle.Visible = false;
             // 
             // Settings
             // 
@@ -584,7 +599,6 @@
         private MetroFramework.Controls.MetroToggle vsyncToggle;
         private MetroFramework.Controls.MetroLabel metroLabel8;
         private MetroFramework.Controls.MetroLabel metroLabel9;
-        private MetroFramework.Controls.MetroToggle xboxFOVToggle;
         private MetroFramework.Controls.MetroToggle introToggle;
         private MetroFramework.Controls.MetroLabel metroLabel10;
         private MetroFramework.Controls.MetroLabel metroLabel11;
@@ -597,5 +611,7 @@
         private MetroFramework.Controls.MetroToggle fpsToggle;
         private MetroFramework.Controls.MetroLabel metroLabel14;
         private MetroFramework.Controls.MetroToggle voiceChatToggle;
+        private MetroFramework.Controls.MetroTrackBar fieldOfView;
+        private MetroFramework.Controls.MetroLabel fovLabel;
     }
 }

@@ -20,7 +20,7 @@ namespace Halo_2_Launcher.Controllers
         private bool _H2VSync = true;
         private int _StartingMonitor = 0;
         private bool _Intro = !Directory.Exists(Paths.InstallPath + "\\movie.bak");
-        private bool _H2XFOV = false;
+        private float _fieldOfView = 57f;
         private bool _RememberAccount = false;
         private string _RememberToken = "";
         private string _RememberUsername = "";
@@ -60,10 +60,10 @@ namespace Halo_2_Launcher.Controllers
             get { return this._Intro; }
             set { this._Intro = value; }
         }
-        public bool H2XFOV
+        public float FieldOfView
         {
-            get { return this._H2XFOV; }
-            set { this._H2XFOV = value; }
+            get { return this._fieldOfView; }
+            set { this._fieldOfView = value; }
         }
         public bool RememberAccount
         {
@@ -142,9 +142,9 @@ namespace Halo_2_Launcher.Controllers
                                 this.Intro = bool.Parse(Setting[1]);
                                 break;
                             }
-                        case "H2XFOV":
+                        case "FieldOfView":
                             {
-                                this.H2XFOV = bool.Parse(Setting[1]);
+                                this.FieldOfView = float.Parse(Setting[1]);
                                 break;
                             }
                         case "RememberAccount":
@@ -182,7 +182,7 @@ namespace Halo_2_Launcher.Controllers
             SB.AppendLine("H2VSync:" + H2VSync.ToString());
             SB.AppendLine("StartingMonitor:" + StartingMonitor.ToString());
             SB.AppendLine("Intro:" + Intro.ToString());
-            SB.AppendLine("H2XFOV:" + H2XFOV.ToString());
+            SB.AppendLine("FieldOfView:" + FieldOfView.ToString());
             SB.AppendLine("RememberAccount:" + RememberAccount.ToString());
             SB.AppendLine("RememberToken:" + EncryptStringAES(RememberToken));
             SB.AppendLine("RememberUsername:" + RememberUsername);

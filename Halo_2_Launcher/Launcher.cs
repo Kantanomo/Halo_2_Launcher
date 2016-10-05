@@ -22,7 +22,6 @@ namespace Halo_2_Launcher
         private static ProcessMemory _Memory;
         private static WebHandler _WebControl;
         private static XliveSettings _XliveSettings;
-        public static string ToolVersion = "1.0";
         public static Halo_2_Launcher.Controllers.Settings LauncherSettings
         { get { if (H2Launcher._LauncherSettings == null) { H2Launcher._LauncherSettings = new Halo_2_Launcher.Controllers.Settings(); } return H2Launcher._LauncherSettings; } }
         public static XliveSettings XliveSettings
@@ -40,7 +39,7 @@ namespace Halo_2_Launcher
             //This function needs a home in the future.
             return Memory.Pointer(0, true, 0x47CD54, Offset);
         }
-        public static async void StartHalo(string Gamertag, string LoginToken, MetroForm Form)
+        public static async void StartHalo(string Gamertag, string LoginToken, Halo_2_Launcher.Forms.MainForm Form)
         {
             Form.Hide();
             XliveSettings.ProfileName1 = Gamertag;
@@ -50,10 +49,31 @@ namespace Halo_2_Launcher
             await Task.Delay(1);
             //File.WriteAllLines(Paths.InstallPath + "token.ini", new string[] { "token=" + LoginToken, "username=" + Gamertag });
             H2Game.RunGame();
+            int RunningTicks = 0;
             while (Process.GetProcessesByName("halo2").Length == 1)
             {
                 //DURING HALO RUNNING THREAD
-                await Task.Delay(1);
+
+                if (RunningTicks == 15) //Check Ban Status every 15 seconds
+                    WebControl.CheckBan(Form, Gamertag, LoginToken);
+               
+                if(RunningTicks == 5) //GameState Check every 5 seconds
+                {
+                    switch (H2Game.GameState)
+                    {
+                        case H2GameState.ingame:
+                            {
+                                H2Game.SetCrossHairPosition();
+                                break;
+                            }
+                    }
+                }
+
+                if (RunningTicks == 15)
+                    RunningTicks = 0;
+                else
+                    RunningTicks++;
+                await Task.Delay(1000);
             }
             Form.Show();
         }

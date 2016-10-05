@@ -35,9 +35,12 @@ namespace Halo_2_Launcher
             this.vsyncToggle.Checked = H2Launcher.LauncherSettings.H2VSync;
             this.soundToggle.Checked = H2Launcher.LauncherSettings.Sound;
             this.introToggle.Checked = H2Launcher.LauncherSettings.Intro;
-            this.xboxFOVToggle.Checked = H2Launcher.LauncherSettings.H2XFOV;
+            this.fieldOfView.Value = (int)H2Launcher.LauncherSettings.FieldOfView;
+            this.fovLabel.Text = H2Launcher.LauncherSettings.FieldOfView.ToString();
             this.debugLogToggle.Checked = (H2Launcher.XliveSettings.DebugLog == 1) ? true : false;
             this.fpsToggle.Checked = (H2Launcher.XliveSettings.FPSCap == 1) ? true : false;
+            this.metroTabControl1.SelectedIndex = 0;
+            this.Invalidate();
             #endregion
         }
 
@@ -90,6 +93,31 @@ namespace Halo_2_Launcher
             _SettingsSaved = true;
             this.Close();
         }
+        private void fieldOfView_Scroll(object sender, ScrollEventArgs e)
+        {
+            switch (e.NewValue)
+            {
+                case 57:
+                    {
+                        fovLabel.Text = "Default";
+                        fovLabel.Style = MetroColorStyle.Green;
+                        break;
+                    }
+                case 65:
+                    {
+                        fovLabel.Text = "Xbox";
+                        fovLabel.Style = MetroColorStyle.Green;
+                        break;
+                    }
+                default:
+                    {
+                        fovLabel.Text = e.NewValue.ToString();
+                        fovLabel.Style = MetroColorStyle.Black;
+                        break;
+                    }
+            }
+            fovLabel.Invalidate(); //You have to invalidate the Graphics of a Metro Control to update it.
+        }
         private void SaveSettings()
         {
             H2Launcher.LauncherSettings.ResolutionHeight = int.Parse(this.heightTextBox.Text);
@@ -99,7 +127,7 @@ namespace Halo_2_Launcher
             H2Launcher.LauncherSettings.H2VSync = vsyncToggle.Checked;
             H2Launcher.LauncherSettings.Sound = soundToggle.Checked;
             H2Launcher.LauncherSettings.Intro = introToggle.Checked;
-            H2Launcher.LauncherSettings.H2XFOV = xboxFOVToggle.Checked;
+            H2Launcher.LauncherSettings.FieldOfView = (float)fieldOfView.Value;
             H2Launcher.XliveSettings.DebugLog = (this.debugLogToggle.Checked) ? 1 : 0;
             H2Launcher.XliveSettings.FPSCap = (this.fpsToggle.Checked) ? 1 : 0;
             if (!introToggle.Checked)
