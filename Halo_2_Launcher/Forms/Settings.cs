@@ -134,8 +134,13 @@ namespace Halo_2_Launcher
             H2Launcher.LauncherSettings.FieldOfView = (float)fieldOfView.Value;
             H2Launcher.XliveSettings.DebugLog = (this.debugLogToggle.Checked) ? 1 : 0;
             H2Launcher.XliveSettings.FPSCap = (this.fpsToggle.Checked) ? 1 : 0;
+<<<<<<< HEAD
             H2Launcher.LauncherSettings.xDelayHotkey = this.xDelayCombo.SelectedItem.ToString();
             H2Launcher.LauncherSettings.noHUDHotkey = this.noHudCombo.SelectedItem.ToString();
+=======
+            H2Launcher.LauncherSettings.xDelayHotkey = this.xDelayCombo.SelectedItem != null ? this.xDelayCombo.SelectedItem.ToString() : string.Empty;
+            H2Launcher.LauncherSettings.noHUDHotkey = this.noHudCombo.SelectedItem != null ? this.noHudCombo.SelectedItem.ToString() : string.Empty;
+>>>>>>> origin/master
             if (!introToggle.Checked)
             {
                 if (!Directory.Exists(Paths.InstallPath + "\\movie.bak"))
