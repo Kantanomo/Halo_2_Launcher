@@ -24,7 +24,7 @@ namespace Halo_2_Launcher.Objects
                 int yeah = 0;
                 if(int.TryParse(aKey,out yeah))
                     aKey = "D" + aKey;
-                System.Windows.Forms.Keys Key = (System.Windows.Forms.Keys)Enum.Parse(typeof(System.Windows.Forms.Keys), aKey.Replace("CTRL", "Control"), true);
+                System.Windows.Forms.Keys Key = (System.Windows.Forms.Keys)Enum.Parse(typeof(System.Windows.Forms.Keys), aKey.Replace("CTRL", "ControlKey"), true);
                 this.Keys[i] = Key;
             }
         }
@@ -37,7 +37,7 @@ namespace Halo_2_Launcher.Objects
                 if (state == -127 || state == -128)
                     PressedCount++;
             }
-            return (PressedCount == Keys.Length - 1);
+            return (PressedCount == Keys.Length);
         }
     }
 }

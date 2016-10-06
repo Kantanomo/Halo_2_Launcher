@@ -27,7 +27,10 @@ namespace Halo_2_Launcher
         public static PostLaunch Post
         { get { if (H2Launcher._Post == null) { H2Launcher._Post = new PostLaunch(); } return H2Launcher._Post; } }
         public static ProcessMemory Memory
-        { get { if (H2Launcher._Memory == null) { H2Launcher._Memory = new ProcessMemory("halo2"); } return H2Launcher._Memory; } }
+        {
+            get { if (H2Launcher._Memory == null) { H2Launcher._Memory = new ProcessMemory("halo2"); } return H2Launcher._Memory; }
+            set { H2Launcher._Memory = value; }
+        }
         public static WebHandler WebControl
         { get { if (H2Launcher._WebControl == null) { H2Launcher._WebControl = new WebHandler(); } return H2Launcher._WebControl; } }
         public static HotkeyController HotkeyController
@@ -43,8 +46,7 @@ namespace Halo_2_Launcher
         public static async void StartHalo(string Gamertag, string LoginToken, Halo_2_Launcher.Forms.MainForm Form)
         {
             Form.Hide();
-            HotkeyController = new HotkeyController();
-            HotkeyController.Initialize();
+            
             XliveSettings.ProfileName1 = Gamertag;
             XliveSettings.loginToken = LoginToken;
             XliveSettings.SaveSettings();
@@ -53,6 +55,8 @@ namespace Halo_2_Launcher
             await Task.Delay(1);
             //File.WriteAllLines(Paths.InstallPath + "token.ini", new string[] { "token=" + LoginToken, "username=" + Gamertag });
             H2Game.RunGame();
+            HotkeyController = new HotkeyController();
+            Memory = new ProcessMemory("halo2");
             int RunningTicks = 0;
             /*
              * Game Running thread ticks every 1 second with a maximum of 15 ticks till reset.

@@ -16,10 +16,6 @@ namespace Halo_2_Launcher.Controllers
         private HotkeyObject noHudHotkey;
         public HotkeyController()
         {
-
-        }
-        public void Initialize()
-        {
             if (H2Launcher.LauncherSettings.xDelayHotkey != "")
                 this.xDelayHotkey = new HotkeyObject(H2Launcher.LauncherSettings.xDelayHotkey);
             if (H2Launcher.LauncherSettings.noHUDHotkey != "")
