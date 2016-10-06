@@ -92,7 +92,6 @@
     <Compile Include="Controllers\Tags\TagTypes.cs" />
     <Compile Include="Controllers\Tags\Weap.cs" />
     <Compile Include="Controllers\Update.cs" />
-    <None Include="Controllers\WebHandler.cs.old" />
     <Compile Include="Controllers\XliveSettings.cs" />
     <Compile Include="Forms\Update.cs">
       <SubType>Form</SubType>
