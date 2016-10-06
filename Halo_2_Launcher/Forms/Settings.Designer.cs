@@ -63,12 +63,12 @@
             this.debugLogToggle = new MetroFramework.Controls.MetroToggle();
             this.forceUpdateButton = new MetroFramework.Controls.MetroButton();
             this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
+            this.noHudCombo = new MetroFramework.Controls.MetroComboBox();
+            this.metroLabel16 = new MetroFramework.Controls.MetroLabel();
             this.xDelayCombo = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel15 = new MetroFramework.Controls.MetroLabel();
             this.applyButton = new MetroFramework.Controls.MetroButton();
             this.cancelButton = new MetroFramework.Controls.MetroButton();
-            this.noHudCombo = new MetroFramework.Controls.MetroComboBox();
-            this.metroLabel16 = new MetroFramework.Controls.MetroLabel();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroPanel3.SuspendLayout();
@@ -168,13 +168,13 @@
             // 
             this.fieldOfView.BackColor = System.Drawing.Color.Transparent;
             this.fieldOfView.Location = new System.Drawing.Point(227, 37);
-            this.fieldOfView.Maximum = 90;
+            this.fieldOfView.Maximum = 110;
             this.fieldOfView.Minimum = 50;
             this.fieldOfView.Name = "fieldOfView";
             this.fieldOfView.Size = new System.Drawing.Size(75, 23);
             this.fieldOfView.TabIndex = 10;
             this.fieldOfView.Text = "metroTrackBar1";
-            this.fieldOfView.Value = 70;
+            this.fieldOfView.Value = 90;
             this.fieldOfView.Scroll += new System.Windows.Forms.ScrollEventHandler(this.fieldOfView_Scroll);
             // 
             // introToggle
@@ -551,6 +551,38 @@
             this.metroTabPage3.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage3.VerticalScrollbarSize = 10;
             // 
+            // noHudCombo
+            // 
+            this.noHudCombo.FormattingEnabled = true;
+            this.noHudCombo.ItemHeight = 23;
+            this.noHudCombo.Items.AddRange(new object[] {
+            "CTRL-1",
+            "CTRL-2",
+            "CTRL-3",
+            "CTRL-4",
+            "CTRL-5",
+            "CTRL-6",
+            "CTRL-7",
+            "CTRL-8",
+            "CTRL-9",
+            "CTRL-10"});
+            this.noHudCombo.Location = new System.Drawing.Point(83, 38);
+            this.noHudCombo.Name = "noHudCombo";
+            this.noHudCombo.Size = new System.Drawing.Size(121, 29);
+            this.noHudCombo.Style = MetroFramework.MetroColorStyle.Blue;
+            this.noHudCombo.TabIndex = 5;
+            this.noHudCombo.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.noHudCombo.UseSelectable = true;
+            // 
+            // metroLabel16
+            // 
+            this.metroLabel16.AutoSize = true;
+            this.metroLabel16.Location = new System.Drawing.Point(0, 44);
+            this.metroLabel16.Name = "metroLabel16";
+            this.metroLabel16.Size = new System.Drawing.Size(58, 19);
+            this.metroLabel16.TabIndex = 4;
+            this.metroLabel16.Text = "No HUD";
+            // 
             // xDelayCombo
             // 
             this.xDelayCombo.FormattingEnabled = true;
@@ -602,38 +634,6 @@
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseSelectable = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
-            // 
-            // noHudCombo
-            // 
-            this.noHudCombo.FormattingEnabled = true;
-            this.noHudCombo.ItemHeight = 23;
-            this.noHudCombo.Items.AddRange(new object[] {
-            "CTRL-1",
-            "CTRL-2",
-            "CTRL-3",
-            "CTRL-4",
-            "CTRL-5",
-            "CTRL-6",
-            "CTRL-7",
-            "CTRL-8",
-            "CTRL-9",
-            "CTRL-10"});
-            this.noHudCombo.Location = new System.Drawing.Point(83, 38);
-            this.noHudCombo.Name = "noHudCombo";
-            this.noHudCombo.Size = new System.Drawing.Size(121, 29);
-            this.noHudCombo.Style = MetroFramework.MetroColorStyle.Blue;
-            this.noHudCombo.TabIndex = 5;
-            this.noHudCombo.Theme = MetroFramework.MetroThemeStyle.Light;
-            this.noHudCombo.UseSelectable = true;
-            // 
-            // metroLabel16
-            // 
-            this.metroLabel16.AutoSize = true;
-            this.metroLabel16.Location = new System.Drawing.Point(0, 44);
-            this.metroLabel16.Name = "metroLabel16";
-            this.metroLabel16.Size = new System.Drawing.Size(58, 19);
-            this.metroLabel16.TabIndex = 4;
-            this.metroLabel16.Text = "No HUD";
             // 
             // Settings
             // 
