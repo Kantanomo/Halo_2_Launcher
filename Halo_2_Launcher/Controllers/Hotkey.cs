@@ -51,18 +51,6 @@ namespace Halo_2_Launcher.Controllers
                                 }
                             break;
                         }
-                    case H2GameState.ingame:
-                        {
-                        if (this.noHudHotkey != null)
-                                if (this.noHudHotkey.Pressed())
-                                {
-                                    H2Launcher.Memory.WriteByte(0, true, 0x2228F8, (byte)((this.noHudHotkey.Triggered) ? 0x84 : 0x85));
-                                    H2Launcher.Memory.WriteByte(0, true, 0x222311, (byte)((this.noHudHotkey.Triggered) ? 0x84 : 0x85));
-                                    H2Launcher.Memory.WriteUInt(0, false, H2Launcher.MapPointer(0xD8C5BC), ((this.noHudHotkey.Triggered) ? 0xF0E3367D : 0xFFFFFFFF));
-                                    this.noHudHotkey.Triggered = !this.noHudHotkey.Triggered;
-                                }
-                            break;
-                        }
                 }
             });
         }
