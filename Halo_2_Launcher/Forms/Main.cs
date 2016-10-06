@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using MetroFramework.Forms;
 using Halo_2_Launcher.Controllers;
 using MetroFramework;
-
+using Halo_2_Launcher.Private;
 namespace Halo_2_Launcher.Forms
 {
     public partial class MainForm : MetroForm
