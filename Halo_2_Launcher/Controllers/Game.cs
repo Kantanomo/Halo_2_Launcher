@@ -91,6 +91,8 @@ namespace Halo_2_Launcher.Controllers
             Process.Start(Info);
             H2Launcher.Post.RunCommands();
         }
+
+        //Remove me
         public void KillGame()
         {
             foreach (Process P in Process.GetProcessesByName("halo2"))

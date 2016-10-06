@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MetroFramework.Forms;
-using System.Runtime.InteropServices;
 using Halo_2_Launcher.Controllers;
-using Halo_2_Launcher.Private;
-using Halo_2_Launcher.Objects;
 using MetroFramework;
 
 namespace Halo_2_Launcher.Forms
@@ -59,7 +49,6 @@ namespace Halo_2_Launcher.Forms
                     this.passwordTextBox.Text = "";
                 }
 
-                //Do the stuff that is in WebHandler.cs
                 switch(loginResult)
                 {
                     case LoginResult.Successfull:

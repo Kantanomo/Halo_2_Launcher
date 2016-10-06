@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Halo_2_Launcher.Objects;
 using Halo_2_Launcher.Controllers;
-using Halo_2_Launcher.Private;
 using System.Diagnostics;
 using MetroFramework;
 using System.Windows.Forms;
@@ -66,7 +65,7 @@ namespace Halo_2_Launcher
 
                     if(banResult == CheckBanResult.Banned)
                     {
-                        H2Launcher.H2Game.KillGame();
+                        XliveSettings.loginToken = "";
                         Form.BringToFront();
                         if (MetroMessageBox.Show(Form, "You have been banned, please visit the forum to appeal your ban.\r\nWould you like us to open the forums for you?.", Fun.PauseIdiomGenerator, System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Error) == DialogResult.Yes)
                         {
