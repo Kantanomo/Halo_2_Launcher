@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Halo_2_Launcher.Objects;
-using System.Windows.Forms;
-using System.Drawing;
-using System.Runtime.InteropServices;
 using Halo_2_Launcher.Controllers;
+using Halo_2_Launcher.Private;
 using System.Diagnostics;
-using MetroFramework.Forms;
-using System.IO;
+using MetroFramework;
+using System.Windows.Forms;
+
 namespace Halo_2_Launcher
 {
     public static class H2Launcher
@@ -66,9 +61,22 @@ namespace Halo_2_Launcher
             while (Process.GetProcessesByName("halo2").Length == 1)//DURING HALO RUNNING THREAD
             {
                 if (RunningTicks == 15) //Check Ban Status every 15 ticks
-                    WebControl.CheckBan(Form, Gamertag, LoginToken);
+                {
+                    var banResult = WebControl.CheckBan(Gamertag, LoginToken);
+
+                    if(banResult == CheckBanResult.Banned)
+                    {
+                        H2Launcher.H2Game.KillGame();
+                        Form.BringToFront();
+                        if (MetroMessageBox.Show(Form, "You have been banned, please visit the forum to appeal your ban.\r\nWould you like us to open the forums for you?.", Fun.PauseIdiomGenerator, System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Error) == DialogResult.Yes)
+                        {
+                            System.Diagnostics.Process.Start(@"http://www.halo2vista.com/forums/");
+                        }
+                    }
+                }
+
                 #region GameStateChecks
-                if(RunningTicks == 5) //GameState Check every 5 ticks
+                if (RunningTicks == 5) //GameState Check every 5 ticks
                 {
                     switch (H2Game.GameState)
                     {

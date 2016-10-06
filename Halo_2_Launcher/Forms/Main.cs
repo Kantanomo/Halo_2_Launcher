@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using MetroFramework.Forms;
 using System.Runtime.InteropServices;
 using Halo_2_Launcher.Controllers;
+using Halo_2_Launcher.Private;
 using Halo_2_Launcher.Objects;
 using MetroFramework;
 
@@ -49,14 +50,48 @@ namespace Halo_2_Launcher.Forms
         }
         public void playButton_Click(object sender, EventArgs e)
         {
-
             if (!this.SettingsOpen)
             {
-                bool success = H2Launcher.WebControl.Login(this, usernameTextBox.Text, passwordTextBox.Text, H2Launcher.XliveSettings.loginToken);
-                if (!success)
+                var loginResult = H2Launcher.WebControl.Login(usernameTextBox.Text, passwordTextBox.Text, H2Launcher.XliveSettings.loginToken);
+                if (loginResult != LoginResult.Successfull)
                 {
                     this.usernameTextBox.Text = "";
                     this.passwordTextBox.Text = "";
+                }
+
+                //Do the stuff that is in WebHandler.cs
+                switch(loginResult)
+                {
+                    case LoginResult.Successfull:
+                        {
+                            H2Launcher.LauncherSettings.RememberUsername = usernameTextBox.Text;
+                            H2Launcher.StartHalo(usernameTextBox.Text, H2Launcher.XliveSettings.loginToken, this);
+                            break;
+                        }
+                    case LoginResult.InvalidLoginToken:
+                        {
+                            MetroMessageBox.Show(this, "The login token was no longer valid.\r\nPlease re-enter your login information and try again.", Fun.PauseIdiomGenerator, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Warning);
+                            H2Launcher.XliveSettings.loginToken = "";
+                            break;
+                        }
+                    case LoginResult.InvalidUsernameOrPassword:
+                        {
+                            MetroMessageBox.Show(this, "The username or password entered is either incorrect or invalid.\r\nPlease try again.", Fun.PauseIdiomGenerator, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Warning);
+                            break;
+                        }
+                    case LoginResult.Banned:
+                        {
+                            if (MetroMessageBox.Show(this, "You have been banned, please visit the forum to appeal your ban.\r\nWould you like us to open the forums for you?.", Fun.PauseIdiomGenerator, System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Error) == DialogResult.Yes)
+                            {
+                                System.Diagnostics.Process.Start(@"http://www.halo2vista.com/forums/");
+                            }
+                            break;
+                        }
+                    case LoginResult.GenericFailure:
+                        {
+                            //wat do?
+                            break;
+                        }
                 }
             }
             else
@@ -113,7 +148,7 @@ namespace Halo_2_Launcher.Forms
                 this.RegisterMode = false;
                 this.Invalidate();
                 this.usernameTextBox.Focus();
-                if (H2Launcher.WebControl.Register(this, this.usernameTextBox.Text, this.passwordTextBox.Text, this.emailTextBox1.Text))
+                if (H2Launcher.WebControl.Register(this.usernameTextBox.Text, this.passwordTextBox.Text, this.emailTextBox1.Text))
                 {
                     MetroMessageBox.Show(this, "Account created", Fun.GoIdioms, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
