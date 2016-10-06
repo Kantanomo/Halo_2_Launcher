@@ -85,7 +85,6 @@
     <Compile Include="Controllers\Memory.cs" />
     <Compile Include="Controllers\PostLaunch.cs" />
     <Compile Include="Controllers\Registry.cs" />
-    <Compile Include="Controllers\Security.cs" />
     <Compile Include="Controllers\Settings.cs" />
     <Compile Include="Controllers\Tags\Properties\Float.cs" />
     <Compile Include="Controllers\Tags\TagBase.cs" />
@@ -94,7 +93,6 @@
     <Compile Include="Controllers\Tags\Weap.cs" />
     <Compile Include="Controllers\Update.cs" />
     <None Include="Controllers\WebHandler.cs.old" />
-    <Compile Include="Controllers\WebHandler.cs" />
     <Compile Include="Controllers\XliveSettings.cs" />
     <Compile Include="Forms\Update.cs">
       <SubType>Form</SubType>
@@ -165,6 +163,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\BlamMap\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Halo_2_Launcher.Private\Halo_2_Launcher.Private.csproj">
+      <Project>{d56ed3f0-7791-4324-ab09-fdf0e9a0f0e0}</Project>
+      <Name>Halo_2_Launcher.Private</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.1.29.4\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.1.29.4\build\dotnet\Fody.targets')" />

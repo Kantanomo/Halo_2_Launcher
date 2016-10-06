@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Management;
 using System.Security.Cryptography;
 
-namespace Halo_2_Launcher.Controllers
+namespace Halo_2_Launcher.Private
 {
     public static class Security
     {
