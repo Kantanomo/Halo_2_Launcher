@@ -31,7 +31,7 @@ namespace Halo_2_Launcher.Controllers
             //Default FOV 1
             //Default Crosshair Offset: 1.66
 
-            float YOffset = (float)Math.Round(0.291f - (0.0021f * H2Launcher.LauncherSettings.FieldOfView), 4, MidpointRounding.ToEven);
+            float YOffset = (float)Math.Round(0.291f - (0.0024f * H2Launcher.LauncherSettings.FieldOfView), 4, MidpointRounding.ToEven);
             H2Launcher.Memory.WriteFloat(0, false, H2Launcher.MapPointer(0x3dc00), YOffset);
         }
         /// <summary>

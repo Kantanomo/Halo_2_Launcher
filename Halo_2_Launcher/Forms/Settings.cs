@@ -151,7 +151,7 @@ namespace Halo_2_Launcher
             }
             else
             {
-                if (File.Exists(Paths.InstallPath + "\\movie.bak"))
+                if (Directory.Exists(Paths.InstallPath + "\\movie.bak"))
                 {
                     Directory.Delete(Paths.InstallPath + "\\movie", true);
                     Directory.Move(Paths.InstallPath + "\\movie.bak", Paths.InstallPath + "\\movie");
