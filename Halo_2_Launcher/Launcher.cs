@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Halo_2_Launcher.Objects;
 using Halo_2_Launcher.Controllers;
-using Halo_2_Launcher.Private;
 using System.Diagnostics;
 using MetroFramework;
 using System.Windows.Forms;
