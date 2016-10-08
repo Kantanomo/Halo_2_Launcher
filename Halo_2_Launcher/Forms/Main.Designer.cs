@@ -38,6 +38,7 @@
             this.registerButton = new MetroFramework.Controls.MetroButton();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.emailTextBox1 = new MetroFramework.Controls.MetroTextBox();
+            this.cancelButton = new MetroFramework.Controls.MetroButton();
             this.SuspendLayout();
             // 
             // playButton
@@ -173,6 +174,22 @@
             this.emailTextBox1.Theme = MetroFramework.MetroThemeStyle.Light;
             this.emailTextBox1.UseSelectable = true;
             // 
+            // cancelButton
+            // 
+            this.cancelButton.FontSize = MetroFramework.MetroButtonSize.Tall;
+            this.cancelButton.FontWeight = MetroFramework.MetroButtonWeight.Regular;
+            this.cancelButton.Location = new System.Drawing.Point(233, 172);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 31);
+            this.cancelButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.cancelButton.TabIndex = 9;
+            this.cancelButton.Tag = "";
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.cancelButton.UseSelectable = true;
+            this.cancelButton.Visible = false;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -182,12 +199,13 @@
             this.Controls.Add(this.metroLabel3);
             this.Controls.Add(this.emailTextBox1);
             this.Controls.Add(this.registerButton);
-            this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.usernameTextBox);
             this.Controls.Add(this.playButton);
             this.Controls.Add(this.metroLabel2);
             this.Controls.Add(this.passwordTextBox);
+            this.Controls.Add(this.settingsButton);
+            this.Controls.Add(this.cancelButton);
             this.ForeColor = System.Drawing.Color.Transparent;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -218,6 +236,7 @@
         public MetroFramework.Controls.MetroTextBox passwordTextBox;
         private MetroFramework.Controls.MetroLabel metroLabel3;
         public MetroFramework.Controls.MetroTextBox emailTextBox1;
+        private MetroFramework.Controls.MetroButton cancelButton;
     }
 }
 

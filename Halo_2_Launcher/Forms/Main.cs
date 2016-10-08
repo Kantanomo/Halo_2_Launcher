@@ -24,13 +24,9 @@ namespace Halo_2_Launcher.Forms
             if (H2Launcher.XliveSettings.loginToken != "")
             {
                 if (H2Launcher.LauncherSettings.RememberUsername != "")
-                {
                     this.passwordTextBox.Text = "PASSWORDHOLDER";
-                }
                 else
-                {
                     H2Launcher.XliveSettings.loginToken = "";
-                }
             }
             this.metroLabel3.Visible = false;
             this.emailTextBox1.Visible = false;
@@ -120,12 +116,14 @@ namespace Halo_2_Launcher.Forms
                 this.usernameTextBox.Focus();
                 this.metroLabel3.Visible = true;
                 this.emailTextBox1.Visible = true;
-                this.registerButton.Width = 285;
+                this.registerButton.Width = 204;
                 this.registerButton.Location = new System.Drawing.Point(23, 172);
                 this.emailTextBox1.Text = "";
                 this.usernameTextBox.Text = "";
                 this.passwordTextBox.Text = "";
+                this.settingsButton.Visible = false;
                 this.RegisterMode = true;
+                this.cancelButton.Visible = true;
                 this.Invalidate();
             }
             else if (this.RegisterMode == true)
@@ -135,6 +133,8 @@ namespace Halo_2_Launcher.Forms
                 this.registerButton.Width = 83;
                 this.registerButton.Location = new System.Drawing.Point(144, 172);
                 this.RegisterMode = false;
+                this.cancelButton.Visible = false;
+                this.settingsButton.Visible = true;
                 this.Invalidate();
                 this.usernameTextBox.Focus();
                 if (H2Launcher.WebControl.Register(this.usernameTextBox.Text, this.passwordTextBox.Text, this.emailTextBox1.Text))
@@ -183,6 +183,22 @@ namespace Halo_2_Launcher.Forms
             {
                 if (H2Launcher.XliveSettings.loginToken != "")
                     H2Launcher.XliveSettings.loginToken = "";
+            }
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            if (this.RegisterMode == true)
+            {
+                this.metroLabel3.Visible = false;
+                this.emailTextBox1.Visible = false;
+                this.registerButton.Width = 83;
+                this.registerButton.Location = new System.Drawing.Point(144, 172);
+                this.RegisterMode = false;
+                this.cancelButton.Visible = false;
+                this.settingsButton.Visible = true;
+                this.Invalidate();
+                this.usernameTextBox.Focus();
             }
         }
     }
