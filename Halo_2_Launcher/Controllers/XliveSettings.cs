@@ -33,6 +33,9 @@ namespace Halo_2_Launcher.Controllers
         private int _GunGame = 0;
         private string _InstallPath = "";
         private int _FPSCap = 1;
+        private int _FPSLimit = 58;
+        private int _FieldOfView = 57;
+        private float _CrosshairOffset = 0.165f;
         private int _VoiceChat = 0;
         private int _DebugLog = 0;
         public string ProfileName1
@@ -65,6 +68,21 @@ namespace Halo_2_Launcher.Controllers
             get { return this._FPSCap; }
             set { this._FPSCap = value; }
         }
+        public int FPSLimit
+        {
+            get { return this._FPSLimit; }
+            set { this._FPSLimit = value; }
+        }
+        public int FieldOfView
+        {
+            get { return this._FieldOfView; }
+            set { this._FieldOfView = value; }
+        }
+        public float CrosshairOffset
+        {
+            get { return this._CrosshairOffset; }
+            set { this._CrosshairOffset = value; }
+        }
         public int VoiceChat
         {
             get { return this._VoiceChat; }
@@ -88,6 +106,9 @@ namespace Halo_2_Launcher.Controllers
             SB.AppendLine("install_path = " + this.InstallPath);
             SB.AppendLine("launcher_path = " + Application.StartupPath);
             SB.AppendLine("fps_enable = " + this.FPSCap);
+            SB.AppendLine("fps_limit = " + this.FPSLimit);
+            SB.AppendLine("field_of_view = " + this.FieldOfView);
+            SB.AppendLine("crosshair_offset = " + this.CrosshairOffset);
             SB.AppendLine("voice_chat = " + this.VoiceChat);
             File.WriteAllText(Paths.InstallPath + "xlive.ini", SB.ToString());
         }
@@ -128,6 +149,21 @@ namespace Halo_2_Launcher.Controllers
                         case "fps_enable":
                             {
                                 this.FPSCap = int.Parse(Setting[1]);
+                                break;
+                            }
+                        case "fps_limit":
+                            {
+                                this.FPSLimit = int.Parse(Setting[1]);
+                                break;
+                            }
+                        case "field_of_view":
+                            {
+                                this.FieldOfView = int.Parse(Setting[1]);
+                                break;
+                            }
+                        case "crosshair_offset":
+                            {
+                                this.CrosshairOffset = float.Parse(Setting[1]);
                                 break;
                             }
                         case "voice_chat":

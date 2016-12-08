@@ -20,7 +20,6 @@ namespace Halo_2_Launcher.Controllers
         private bool _H2VSync = true;
         private int _StartingMonitor = 0;
         private bool _Intro = !Directory.Exists(Paths.InstallPath + "\\movie.bak");
-        private float _fieldOfView = 57f;
         private bool _RememberAccount = false;
         private string _RememberToken = "";
         private string _RememberUsername = "";
@@ -61,11 +60,6 @@ namespace Halo_2_Launcher.Controllers
         {
             get { return this._Intro; }
             set { this._Intro = value; }
-        }
-        public float FieldOfView
-        {
-            get { return this._fieldOfView; }
-            set { this._fieldOfView = value; }
         }
         public bool RememberAccount
         {
@@ -153,11 +147,6 @@ namespace Halo_2_Launcher.Controllers
                                 this.Intro = bool.Parse(Setting[1]);
                                 break;
                             }
-                        case "FieldOfView":
-                            {
-                                this.FieldOfView = float.Parse(Setting[1]);
-                                break;
-                            }
                         case "RememberAccount":
                             {
                                 this.RememberAccount = bool.Parse(Setting[1]);
@@ -203,7 +192,6 @@ namespace Halo_2_Launcher.Controllers
             SB.AppendLine("H2VSync:" + H2VSync.ToString());
             SB.AppendLine("StartingMonitor:" + StartingMonitor.ToString());
             SB.AppendLine("Intro:" + Intro.ToString());
-            SB.AppendLine("FieldOfView:" + FieldOfView.ToString());
             SB.AppendLine("RememberAccount:" + RememberAccount.ToString());
             SB.AppendLine("RememberToken:" + EncryptStringAES(RememberToken));
             SB.AppendLine("RememberUsername:" + RememberUsername);

@@ -78,20 +78,6 @@ namespace Halo_2_Launcher
                     }
                 }
 
-                #region GameStateChecks
-                if (RunningTicks == 5) //GameState Check every 5 ticks
-                {
-                    switch (H2Game.GameState)
-                    {
-                        case H2GameState.ingame:
-                            {
-                                H2Game.SetCrossHairPosition();
-                                break;
-                            }
-                    }
-                }
-                #endregion
-
                 HotkeyController.ExecuteHotKeys();
 
                 #region TickLogic
