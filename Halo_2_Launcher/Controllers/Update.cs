@@ -192,19 +192,10 @@ namespace Halo_2_Launcher.Controllers
                     {
                         Paths.InstallPath = ofd.FileName.Replace(ofd.SafeFileName, "");
                     }
-                    else 
+                    else
                     {
                         CheckInstallPath();
                     }
-                }
-            }
-            else
-            {
-                if(!Directory.Exists(Paths.InstallPath))
-                {
-                    MetroMessageBox.Show(this._Form, "Halo 2 Install Folder was not found please relink it.", "", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
-                    Paths.InstallPath = "";
-                    CheckInstallPath();
                 }
             }
         }
