@@ -198,6 +198,15 @@ namespace Halo_2_Launcher.Controllers
                     }
                 }
             }
+            else
+            {
+                if (!Directory.Exists(Paths.InstallPath))
+                {
+                    MetroMessageBox.Show(this._Form, "Halo 2 Install Folder was not found please relink it.", "", MessageBoxButtons.OK, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                    Paths.InstallPath = "";
+                    CheckInstallPath();
+                }
+            }
         }
         private bool UpdateGameToLatest()
         {

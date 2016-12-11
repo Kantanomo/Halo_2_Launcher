@@ -98,7 +98,7 @@ namespace Halo_2_Launcher.Objects
         }
         public static string RemotePath
         {
-            get { return @"http://halo2vista.com/H2Cartographer/"; }
+            get { return @"http://69.195.136.203/H2Cartographer/"; }
         }
         public static string RemoteApiPath
         {
