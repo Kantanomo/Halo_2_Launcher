@@ -81,6 +81,7 @@
             this.metroLabel2.Size = new System.Drawing.Size(91, 25);
             this.metroLabel2.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroLabel2.TabIndex = 4;
+            this.metroLabel2.Tag = "Contraseña:";
             this.metroLabel2.Text = "Password:";
             this.metroLabel2.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroLabel2.Click += new System.EventHandler(this.metroLabel2_Click);
@@ -89,7 +90,7 @@
             // 
             this.usernameTextBox.Lines = new string[0];
             this.usernameTextBox.Location = new System.Drawing.Point(124, 62);
-            this.usernameTextBox.MaxLength = 255;
+            this.usernameTextBox.MaxLength = 15;
             this.usernameTextBox.Name = "usernameTextBox";
             this.usernameTextBox.PasswordChar = '\0';
             this.usernameTextBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -111,6 +112,7 @@
             this.metroLabel1.Size = new System.Drawing.Size(95, 25);
             this.metroLabel1.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroLabel1.TabIndex = 2;
+            this.metroLabel1.Tag = "Usuario:";
             this.metroLabel1.Text = "Username:";
             this.metroLabel1.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroLabel1.Click += new System.EventHandler(this.metroLabel1_Click);
@@ -156,6 +158,7 @@
             this.metroLabel3.Size = new System.Drawing.Size(58, 25);
             this.metroLabel3.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroLabel3.TabIndex = 8;
+            this.metroLabel3.Tag = "Correo:";
             this.metroLabel3.Text = "Email:";
             this.metroLabel3.Theme = MetroFramework.MetroThemeStyle.Light;
             // 
@@ -163,7 +166,7 @@
             // 
             this.emailTextBox1.Lines = new string[0];
             this.emailTextBox1.Location = new System.Drawing.Point(124, 120);
-            this.emailTextBox1.MaxLength = 18;
+            this.emailTextBox1.MaxLength = 0;
             this.emailTextBox1.Name = "emailTextBox1";
             this.emailTextBox1.PasswordChar = '\0';
             this.emailTextBox1.ScrollBars = System.Windows.Forms.ScrollBars.None;

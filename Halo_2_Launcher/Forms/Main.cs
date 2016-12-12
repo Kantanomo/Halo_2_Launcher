@@ -3,6 +3,8 @@ using System.Windows.Forms;
 using MetroFramework.Forms;
 using Halo_2_Launcher.Controllers;
 using MetroFramework;
+using System.Globalization;
+
 namespace Halo_2_Launcher.Forms
 {
     public partial class MainForm : MetroForm
@@ -17,6 +19,14 @@ namespace Halo_2_Launcher.Forms
         {
             this.ShadowType = MetroFormShadowType.None;
             InitializeComponent();
+            //CultureInfo culture = CultureInfo.CurrentCulture;
+            //string locale = culture.Name;
+            //if (locale.Contains("-"))
+            //    locale = locale.Split('-')[0];
+            //if(locale.ToLower() == "es")
+            //{
+                
+            //}
             H2Launcher.LauncherSettings.LoadSettings();
             H2Launcher.XliveSettings.LoadSettings();
             this.usernameTextBox.Text = H2Launcher.LauncherSettings.RememberUsername;
@@ -33,6 +43,15 @@ namespace Halo_2_Launcher.Forms
             _settings = new Settings();
             _settings.FormClosed += _settings_Closed;
         }
+        //private void switchLanguage(ControlCollection Controls)
+        //{
+        //    foreach(Control C in Controls)
+        //    {
+        //        C.Text = C.Tag;
+        //        if(C.Controls.Count > 0)
+
+        //    }
+        //}
         public void playButton_Click(object sender, EventArgs e)
         {
             if (!this.SettingsOpen)
