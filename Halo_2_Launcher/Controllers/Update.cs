@@ -27,8 +27,6 @@ namespace Halo_2_Launcher.Controllers
         public UpdateController(Halo_2_Launcher.Forms.Update Form)
         {
             this._Form = Form;
-            H2Launcher.LauncherSettings.LoadSettings();
-            H2Launcher.XliveSettings.LoadSettings();
         }
         public bool LoadRemoteUpdateCollection()
         {
