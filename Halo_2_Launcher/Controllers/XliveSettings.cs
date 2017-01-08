@@ -82,7 +82,6 @@ namespace Halo_2_Launcher.Controllers
             SB.AppendLine("name = " + this.ProfileName1);
             SB.AppendLine("debug_log = " + this.DebugLog);
             SB.AppendLine("port = " + this.Ports);
-            SB.AppendLine("arguments = "); //Not needed as the launcher doesn't pass arguments they are built at runtime based off of the settings.
             SB.AppendLine("login_token = " + this.loginToken);
             SB.AppendLine("gungame = " + this.GunGame);
             SB.AppendLine("install_path = " + this.InstallPath);

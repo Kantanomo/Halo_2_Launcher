@@ -38,6 +38,12 @@ namespace Halo_2_Launcher.Objects
         matchmaking = 5,
         unknown = 0
     }
+    public enum H2GameEnvironment : int
+    {
+        Cartographer = 1,
+        xliveless = 2,
+        LIVE = 3
+    }
     public enum VirtualKeyStates : int
     {
         VK_LBUTTON = 0x01,
