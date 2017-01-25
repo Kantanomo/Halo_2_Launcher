@@ -108,10 +108,8 @@ namespace Halo_2_Launcher.Controllers
                                                }
                                         )
                     )
-                    {
                         if (File.Exists(((UpdateObject)UO).localpath.Replace("_temp", "")))
                             tUpdateColleciton.AddObject((UpdateObject)UO);
-                    }
                     _LocalUpdateCollection = tUpdateColleciton;
                     return true;
                 }

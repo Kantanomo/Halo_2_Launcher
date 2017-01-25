@@ -55,6 +55,8 @@
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.widthTextBox = new MetroFramework.Controls.MetroTextBox();
             this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
+            this.gameEnvironmentComboBox = new MetroFramework.Controls.MetroComboBox();
+            this.metroLabel17 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel14 = new MetroFramework.Controls.MetroLabel();
             this.voiceChatToggle = new MetroFramework.Controls.MetroToggle();
             this.metroLabel13 = new MetroFramework.Controls.MetroLabel();
@@ -86,7 +88,7 @@
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControl1.Location = new System.Drawing.Point(20, 60);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 0;
+            this.metroTabControl1.SelectedIndex = 1;
             this.metroTabControl1.Size = new System.Drawing.Size(432, 211);
             this.metroTabControl1.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTabControl1.TabIndex = 0;
@@ -436,6 +438,8 @@
             // 
             // metroTabPage2
             // 
+            this.metroTabPage2.Controls.Add(this.gameEnvironmentComboBox);
+            this.metroTabPage2.Controls.Add(this.metroLabel17);
             this.metroTabPage2.Controls.Add(this.metroLabel14);
             this.metroTabPage2.Controls.Add(this.voiceChatToggle);
             this.metroTabPage2.Controls.Add(this.metroLabel13);
@@ -455,6 +459,36 @@
             this.metroTabPage2.VerticalScrollbarBarColor = true;
             this.metroTabPage2.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage2.VerticalScrollbarSize = 10;
+            // 
+            // gameEnvironmentComboBox
+            // 
+            this.gameEnvironmentComboBox.AutoCompleteCustomSource.AddRange(new string[] {
+            "Cartographer",
+            "xliveless",
+            "LIVE"});
+            this.gameEnvironmentComboBox.FontSize = MetroFramework.MetroComboBoxSize.Small;
+            this.gameEnvironmentComboBox.FormattingEnabled = true;
+            this.gameEnvironmentComboBox.ItemHeight = 19;
+            this.gameEnvironmentComboBox.Items.AddRange(new object[] {
+            "Cartographer",
+            "xliveless",
+            "LIVE"});
+            this.gameEnvironmentComboBox.Location = new System.Drawing.Point(133, 103);
+            this.gameEnvironmentComboBox.Name = "gameEnvironmentComboBox";
+            this.gameEnvironmentComboBox.Size = new System.Drawing.Size(121, 25);
+            this.gameEnvironmentComboBox.Style = MetroFramework.MetroColorStyle.Blue;
+            this.gameEnvironmentComboBox.TabIndex = 12;
+            this.gameEnvironmentComboBox.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.gameEnvironmentComboBox.UseSelectable = true;
+            // 
+            // metroLabel17
+            // 
+            this.metroLabel17.AutoSize = true;
+            this.metroLabel17.Location = new System.Drawing.Point(3, 106);
+            this.metroLabel17.Name = "metroLabel17";
+            this.metroLabel17.Size = new System.Drawing.Size(124, 19);
+            this.metroLabel17.TabIndex = 11;
+            this.metroLabel17.Text = "Game Environment:";
             // 
             // metroLabel14
             // 
@@ -711,5 +745,7 @@
         private MetroFramework.Controls.MetroLabel metroLabel15;
         private MetroFramework.Controls.MetroComboBox noHudCombo;
         private MetroFramework.Controls.MetroLabel metroLabel16;
+        private MetroFramework.Controls.MetroLabel metroLabel17;
+        private MetroFramework.Controls.MetroComboBox gameEnvironmentComboBox;
     }
 }

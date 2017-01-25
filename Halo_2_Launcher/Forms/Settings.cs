@@ -19,6 +19,7 @@ namespace Halo_2_Launcher
     public partial class Settings : MetroForm
     {
         private bool _SettingsSaved = false;
+        public bool LIVE = false;
         public Settings()
         {
             InitializeComponent();
@@ -39,6 +40,7 @@ namespace Halo_2_Launcher
             this.fovLabel.Text = H2Launcher.LauncherSettings.FieldOfView.ToString();
             this.debugLogToggle.Checked = (H2Launcher.XliveSettings.DebugLog == 1) ? true : false;
             this.fpsToggle.Checked = (H2Launcher.XliveSettings.FPSCap == 1) ? true : false;
+            this.gameEnvironmentComboBox.SelectedItem = H2Launcher.LauncherSettings.GameEnvironment.ToString();
             this.metroTabControl1.SelectedIndex = 0;
             if (H2Launcher.LauncherSettings.xDelayHotkey != "")
                 this.xDelayCombo.SelectedIndex = this.xDelayCombo.FindStringExact(H2Launcher.LauncherSettings.xDelayHotkey.Trim());
@@ -84,14 +86,19 @@ namespace Halo_2_Launcher
                 //MetroMessageBox.Show(this, , Fun.PauseIdiomGenerator, System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Warning);
             }
         }
-
         private void applyButton_Click(object sender, EventArgs e)
         {
+            if (gameEnvironmentComboBox.SelectedItem.ToString() == "Cartographer")
+                MessageBox.Show("This will enable Project Cartographer and all its problems and features!");
+            if (gameEnvironmentComboBox.SelectedItem.ToString() == "LIVE")
+                MessageBox.Show("This will make Halo 2 run without any mods, it enables Games for Windows LIVE.");
+            if (gameEnvironmentComboBox.SelectedItem.ToString() == "xliveless")
+                MessageBox.Show("This will enable xliveless, which allows for campaign play without FPS drops.\r\nThis does disable Project Cartographer features nor does it enable LIVE.");
+
             _SettingsSaved = true;
             SaveSettings();
             this.Close();
         }
-
         private void cancelButton_Click(object sender, EventArgs e)
         {
             _SettingsSaved = true;
@@ -134,6 +141,7 @@ namespace Halo_2_Launcher
             H2Launcher.LauncherSettings.FieldOfView = (float)fieldOfView.Value;
             H2Launcher.XliveSettings.DebugLog = (this.debugLogToggle.Checked) ? 1 : 0;
             H2Launcher.XliveSettings.FPSCap = (this.fpsToggle.Checked) ? 1 : 0;
+            H2Launcher.LauncherSettings.GameEnvironment = (H2GameEnvironment)Enum.Parse(typeof(H2GameEnvironment), this.gameEnvironmentComboBox.SelectedItem.ToString());
             H2Launcher.LauncherSettings.xDelayHotkey = this.xDelayCombo.SelectedItem != null ? this.xDelayCombo.SelectedItem.ToString() : string.Empty;
             H2Launcher.LauncherSettings.noHUDHotkey = this.noHudCombo.SelectedItem != null ? this.noHudCombo.SelectedItem.ToString() : string.Empty;
             if (!introToggle.Checked)
@@ -154,6 +162,46 @@ namespace Halo_2_Launcher
                     Directory.Delete(Paths.InstallPath + "\\movie", true);
                     Directory.Move(Paths.InstallPath + "\\movie.bak", Paths.InstallPath + "\\movie");
                 }
+            }
+
+            string xlive = Paths.InstallPath + "xlive.dll";
+            string xliveless = Paths.InstallPath + "xliveless.dll";
+            string xlive_project = Paths.InstallPath + "xlive_project.dll";
+            switch (H2Launcher.LauncherSettings.GameEnvironment)
+            {
+                case H2GameEnvironment.LIVE:
+                    {
+                        if (File.Exists(xlive) && File.Exists(xliveless))
+                            File.Move(xlive, xlive_project);
+                        else if (File.Exists(xlive) && File.Exists(xlive_project))
+                            File.Move(xlive, xliveless);
+                        H2Launcher.LauncherSettings.GameEnvironment = H2GameEnvironment.LIVE;
+                        break;
+                    }
+                case H2GameEnvironment.Cartographer:
+                    {
+                        if (File.Exists(xlive) && !File.Exists(xliveless))
+                        {
+                            File.Move(xlive, xliveless);
+                            File.Move(xlive_project, xlive);
+                        }
+                        else if (!File.Exists(xlive) && File.Exists(xliveless))
+                            File.Move(xlive_project, xlive);
+                        H2Launcher.LauncherSettings.GameEnvironment = H2GameEnvironment.Cartographer;
+                        break;
+                    }
+                case H2GameEnvironment.xliveless:
+                    {
+                        if (!File.Exists(xlive) && !File.Exists(xliveless))
+                            File.Move(xlive_project, xlive);
+                        else if (File.Exists(xlive) && File.Exists(xliveless))
+                        {
+                            File.Move(xlive, xlive_project);
+                            File.Move(xliveless, xlive);
+                        }
+                        H2Launcher.LauncherSettings.GameEnvironment = H2GameEnvironment.xliveless;
+                        break;
+                    }
             }
             H2Launcher.LauncherSettings.SaveSettings();
             H2Launcher.XliveSettings.SaveSettings();
