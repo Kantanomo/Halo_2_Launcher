@@ -28,17 +28,25 @@ namespace Halo_2_Launcher.Controllers
          * 
          * */
         private string _ProfileName1 = "player 1";
+        private int _DebugLog = 0;
         private int _Ports = 1000;
         private string _loginToken = "";
         private int _GunGame = 0;
         private string _InstallPath = "";
         private int _FPSCap = 1;
+        private int _FPSLimit = 60;
         private int _VoiceChat = 0;
-        private int _DebugLog = 0;
+        private int _MapDownload = 1;
+
         public string ProfileName1
         {
             get { return this._ProfileName1; }
             set { this._ProfileName1 = value; }
+        }
+        public int DebugLog
+        {
+            get { return this._DebugLog; }
+            set { this._DebugLog = value; }
         }
         public int Ports
         {
@@ -65,16 +73,22 @@ namespace Halo_2_Launcher.Controllers
             get { return this._FPSCap; }
             set { this._FPSCap = value; }
         }
+        public int FPSLimit
+        {
+            get { return this._FPSLimit; }
+            set { this._FPSLimit = value; }
+        }
         public int VoiceChat
         {
             get { return this._VoiceChat; }
             set { this._VoiceChat = value; }
         }
-        public int DebugLog
+        public int MapDownload
         {
-            get { return this._DebugLog; }
-            set { this._DebugLog = value; }
+            get { return this._MapDownload; }
+            set { this._MapDownload = value; }
         }
+
         public void SaveSettings()
         {
             //ADD SETTINGS CONTROLS FOR THE SETTINGS THAT NEED IT.
@@ -82,15 +96,17 @@ namespace Halo_2_Launcher.Controllers
             SB.AppendLine("name = " + this.ProfileName1);
             SB.AppendLine("debug_log = " + this.DebugLog);
             SB.AppendLine("port = " + this.Ports);
-            SB.AppendLine("arguments = "); //Not needed as the launcher doesn't pass arguments they are built at runtime based off of the settings.
             SB.AppendLine("login_token = " + this.loginToken);
             SB.AppendLine("gungame = " + this.GunGame);
             SB.AppendLine("install_path = " + this.InstallPath);
             SB.AppendLine("launcher_path = " + Application.StartupPath);
             SB.AppendLine("fps_enable = " + this.FPSCap);
+            SB.AppendLine("fps_limit = " + this.FPSLimit);
             SB.AppendLine("voice_chat = " + this.VoiceChat);
+            SB.AppendLine("map_downloading_enable = " + this.MapDownload);
             File.WriteAllText(Paths.InstallPath + "xlive.ini", SB.ToString());
         }
+
         public void LoadSettings()
         {
             if (!File.Exists(Paths.InstallPath + "xlive.ini")) SaveSettings();
@@ -108,6 +124,11 @@ namespace Halo_2_Launcher.Controllers
                         case "name":
                             {
                                 this.ProfileName1 = Setting[1];
+                                break;
+                            }
+                        case "debug_log":
+                            {
+                                this.DebugLog = int.Parse(Setting[1]);
                                 break;
                             }
                         case "port":
@@ -130,14 +151,19 @@ namespace Halo_2_Launcher.Controllers
                                 this.FPSCap = int.Parse(Setting[1]);
                                 break;
                             }
+                        case "fps_limit":
+                            {
+                                this.FPSLimit = int.Parse(Setting[1]);
+                                break;
+                            }
                         case "voice_chat":
                             {
                                 this.VoiceChat = int.Parse(Setting[1]);
                                 break;
                             }
-                        case "debug_log":
+                        case "map_downloading_enable":
                             {
-                                this.DebugLog = int.Parse(Setting[1]);
+                                this.MapDownload = int.Parse(Setting[1]);
                                 break;
                             }
                     }

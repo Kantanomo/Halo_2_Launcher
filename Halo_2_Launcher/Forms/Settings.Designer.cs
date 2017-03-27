@@ -55,6 +55,7 @@
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.widthTextBox = new MetroFramework.Controls.MetroTextBox();
             this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
+            this.fps_value_textbox = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel14 = new MetroFramework.Controls.MetroLabel();
             this.voiceChatToggle = new MetroFramework.Controls.MetroToggle();
             this.metroLabel13 = new MetroFramework.Controls.MetroLabel();
@@ -69,6 +70,10 @@
             this.metroLabel15 = new MetroFramework.Controls.MetroLabel();
             this.applyButton = new MetroFramework.Controls.MetroButton();
             this.cancelButton = new MetroFramework.Controls.MetroButton();
+            this.metroLabel17 = new MetroFramework.Controls.MetroLabel();
+            this.map_download_toggle = new MetroFramework.Controls.MetroToggle();
+            this.metroLabel18 = new MetroFramework.Controls.MetroLabel();
+            this.game_ports_textBox = new MetroFramework.Controls.MetroTextBox();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.metroPanel3.SuspendLayout();
@@ -86,7 +91,7 @@
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControl1.Location = new System.Drawing.Point(20, 60);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 0;
+            this.metroTabControl1.SelectedIndex = 1;
             this.metroTabControl1.Size = new System.Drawing.Size(432, 211);
             this.metroTabControl1.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTabControl1.TabIndex = 0;
@@ -436,6 +441,11 @@
             // 
             // metroTabPage2
             // 
+            this.metroTabPage2.Controls.Add(this.game_ports_textBox);
+            this.metroTabPage2.Controls.Add(this.metroLabel18);
+            this.metroTabPage2.Controls.Add(this.map_download_toggle);
+            this.metroTabPage2.Controls.Add(this.metroLabel17);
+            this.metroTabPage2.Controls.Add(this.fps_value_textbox);
             this.metroTabPage2.Controls.Add(this.metroLabel14);
             this.metroTabPage2.Controls.Add(this.voiceChatToggle);
             this.metroTabPage2.Controls.Add(this.metroLabel13);
@@ -456,20 +466,34 @@
             this.metroTabPage2.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage2.VerticalScrollbarSize = 10;
             // 
+            // fps_value_textbox
+            // 
+            this.fps_value_textbox.Lines = new string[0];
+            this.fps_value_textbox.Location = new System.Drawing.Point(215, 24);
+            this.fps_value_textbox.MaxLength = 32767;
+            this.fps_value_textbox.Name = "fps_value_textbox";
+            this.fps_value_textbox.PasswordChar = '\0';
+            this.fps_value_textbox.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.fps_value_textbox.SelectedText = "";
+            this.fps_value_textbox.Size = new System.Drawing.Size(33, 23);
+            this.fps_value_textbox.TabIndex = 11;
+            this.fps_value_textbox.UseSelectable = true;
+            this.fps_value_textbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.fps_value_textbox_KeyPress);
+            // 
             // metroLabel14
             // 
             this.metroLabel14.AutoSize = true;
-            this.metroLabel14.Location = new System.Drawing.Point(3, 46);
+            this.metroLabel14.Location = new System.Drawing.Point(3, 47);
             this.metroLabel14.Name = "metroLabel14";
             this.metroLabel14.Size = new System.Drawing.Size(74, 19);
             this.metroLabel14.TabIndex = 10;
             this.metroLabel14.Text = "Voice Chat:";
-            this.metroLabel14.Visible = false;
             // 
             // voiceChatToggle
             // 
             this.voiceChatToggle.AutoSize = true;
-            this.voiceChatToggle.Location = new System.Drawing.Point(83, 48);
+            this.voiceChatToggle.Enabled = false;
+            this.voiceChatToggle.Location = new System.Drawing.Point(129, 49);
             this.voiceChatToggle.Name = "voiceChatToggle";
             this.voiceChatToggle.Size = new System.Drawing.Size(80, 17);
             this.voiceChatToggle.Style = MetroFramework.MetroColorStyle.Blue;
@@ -477,12 +501,11 @@
             this.voiceChatToggle.Text = "Off";
             this.voiceChatToggle.Theme = MetroFramework.MetroThemeStyle.Light;
             this.voiceChatToggle.UseSelectable = true;
-            this.voiceChatToggle.Visible = false;
             // 
             // metroLabel13
             // 
             this.metroLabel13.AutoSize = true;
-            this.metroLabel13.Location = new System.Drawing.Point(3, 23);
+            this.metroLabel13.Location = new System.Drawing.Point(3, 24);
             this.metroLabel13.Name = "metroLabel13";
             this.metroLabel13.Size = new System.Drawing.Size(79, 19);
             this.metroLabel13.TabIndex = 8;
@@ -491,7 +514,7 @@
             // fpsToggle
             // 
             this.fpsToggle.AutoSize = true;
-            this.fpsToggle.Location = new System.Drawing.Point(83, 25);
+            this.fpsToggle.Location = new System.Drawing.Point(129, 26);
             this.fpsToggle.Name = "fpsToggle";
             this.fpsToggle.Size = new System.Drawing.Size(80, 17);
             this.fpsToggle.Style = MetroFramework.MetroColorStyle.Blue;
@@ -499,6 +522,7 @@
             this.fpsToggle.Text = "Off";
             this.fpsToggle.Theme = MetroFramework.MetroThemeStyle.Light;
             this.fpsToggle.UseSelectable = true;
+            this.fpsToggle.CheckedChanged += new System.EventHandler(this.fpsToggle_CheckedChanged);
             // 
             // metroLabel12
             // 
@@ -512,7 +536,7 @@
             // debugLogToggle
             // 
             this.debugLogToggle.AutoSize = true;
-            this.debugLogToggle.Location = new System.Drawing.Point(83, 2);
+            this.debugLogToggle.Location = new System.Drawing.Point(129, 3);
             this.debugLogToggle.Name = "debugLogToggle";
             this.debugLogToggle.Size = new System.Drawing.Size(80, 17);
             this.debugLogToggle.Style = MetroFramework.MetroColorStyle.Blue;
@@ -635,6 +659,50 @@
             this.cancelButton.UseSelectable = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
+            // metroLabel17
+            // 
+            this.metroLabel17.AutoSize = true;
+            this.metroLabel17.Location = new System.Drawing.Point(3, 69);
+            this.metroLabel17.Name = "metroLabel17";
+            this.metroLabel17.Size = new System.Drawing.Size(120, 19);
+            this.metroLabel17.TabIndex = 12;
+            this.metroLabel17.Text = "Map Downloading:";
+            // 
+            // map_download_toggle
+            // 
+            this.map_download_toggle.AutoSize = true;
+            this.map_download_toggle.Location = new System.Drawing.Point(129, 72);
+            this.map_download_toggle.Name = "map_download_toggle";
+            this.map_download_toggle.Size = new System.Drawing.Size(80, 17);
+            this.map_download_toggle.Style = MetroFramework.MetroColorStyle.Blue;
+            this.map_download_toggle.TabIndex = 13;
+            this.map_download_toggle.Text = "Off";
+            this.map_download_toggle.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.map_download_toggle.UseSelectable = true;
+            // 
+            // metroLabel18
+            // 
+            this.metroLabel18.AutoSize = true;
+            this.metroLabel18.Location = new System.Drawing.Point(3, 95);
+            this.metroLabel18.Name = "metroLabel18";
+            this.metroLabel18.Size = new System.Drawing.Size(107, 19);
+            this.metroLabel18.TabIndex = 14;
+            this.metroLabel18.Text = "Game Base Port:";
+            // 
+            // game_ports_textBox
+            // 
+            this.game_ports_textBox.Lines = new string[0];
+            this.game_ports_textBox.Location = new System.Drawing.Point(158, 95);
+            this.game_ports_textBox.MaxLength = 32767;
+            this.game_ports_textBox.Name = "game_ports_textBox";
+            this.game_ports_textBox.PasswordChar = '\0';
+            this.game_ports_textBox.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.game_ports_textBox.SelectedText = "";
+            this.game_ports_textBox.Size = new System.Drawing.Size(51, 23);
+            this.game_ports_textBox.TabIndex = 15;
+            this.game_ports_textBox.UseSelectable = true;
+            this.game_ports_textBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.metroTextBox1_KeyPress);
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -711,5 +779,10 @@
         private MetroFramework.Controls.MetroLabel metroLabel15;
         private MetroFramework.Controls.MetroComboBox noHudCombo;
         private MetroFramework.Controls.MetroLabel metroLabel16;
+        private MetroFramework.Controls.MetroTextBox fps_value_textbox;
+        private MetroFramework.Controls.MetroToggle map_download_toggle;
+        private MetroFramework.Controls.MetroLabel metroLabel17;
+        private MetroFramework.Controls.MetroTextBox game_ports_textBox;
+        private MetroFramework.Controls.MetroLabel metroLabel18;
     }
 }

@@ -22,6 +22,7 @@ namespace Halo_2_Launcher
         public Settings()
         {
             InitializeComponent();
+
             #region SetControls
             this.widthTextBox.Text = H2Launcher.LauncherSettings.ResolutionWidth.ToString();
             this.heightTextBox.Text = H2Launcher.LauncherSettings.ResolutionHeight.ToString();
@@ -38,7 +39,11 @@ namespace Halo_2_Launcher
             this.fieldOfView.Value = (int)H2Launcher.LauncherSettings.FieldOfView;
             this.fovLabel.Text = H2Launcher.LauncherSettings.FieldOfView.ToString();
             this.debugLogToggle.Checked = (H2Launcher.XliveSettings.DebugLog == 1) ? true : false;
+            this.game_ports_textBox.Text = H2Launcher.XliveSettings.Ports.ToString();
             this.fpsToggle.Checked = (H2Launcher.XliveSettings.FPSCap == 1) ? true : false;
+            this.fps_value_textbox.Text = H2Launcher.XliveSettings.FPSLimit.ToString();
+            this.voiceChatToggle.Checked = (H2Launcher.XliveSettings.VoiceChat == 1) ? true : false;
+            this.map_download_toggle.Checked = (H2Launcher.XliveSettings.MapDownload == 1) ? true : false;
             this.metroTabControl1.SelectedIndex = 0;
             if (H2Launcher.LauncherSettings.xDelayHotkey != "")
                 this.xDelayCombo.SelectedIndex = this.xDelayCombo.FindStringExact(H2Launcher.LauncherSettings.xDelayHotkey.Trim());
@@ -46,6 +51,11 @@ namespace Halo_2_Launcher
                 this.noHudCombo.SelectedIndex = this.noHudCombo.FindStringExact(H2Launcher.LauncherSettings.noHUDHotkey.Trim());
             this.Invalidate();
             #endregion
+
+            if (!this.fpsToggle.Checked)
+                this.fps_value_textbox.Enabled = false;
+            else
+                this.fps_value_textbox.Enabled = true;
         }
 
         private void textBox_Numerical(object sender, KeyPressEventArgs e)
@@ -133,7 +143,11 @@ namespace Halo_2_Launcher
             H2Launcher.LauncherSettings.Intro = introToggle.Checked;
             H2Launcher.LauncherSettings.FieldOfView = (float)fieldOfView.Value;
             H2Launcher.XliveSettings.DebugLog = (this.debugLogToggle.Checked) ? 1 : 0;
+            H2Launcher.XliveSettings.Ports = int.Parse(this.game_ports_textBox.Text);
             H2Launcher.XliveSettings.FPSCap = (this.fpsToggle.Checked) ? 1 : 0;
+            H2Launcher.XliveSettings.FPSLimit = int.Parse(this.fps_value_textbox.Text);
+            H2Launcher.XliveSettings.VoiceChat = (this.voiceChatToggle.Checked) ? 1 : 0;
+            H2Launcher.XliveSettings.MapDownload = (this.map_download_toggle.Checked) ? 1 : 0;
             H2Launcher.LauncherSettings.xDelayHotkey = this.xDelayCombo.SelectedItem != null ? this.xDelayCombo.SelectedItem.ToString() : string.Empty;
             H2Launcher.LauncherSettings.noHUDHotkey = this.noHudCombo.SelectedItem != null ? this.noHudCombo.SelectedItem.ToString() : string.Empty;
             if (!introToggle.Checked)
@@ -157,6 +171,24 @@ namespace Halo_2_Launcher
             }
             H2Launcher.LauncherSettings.SaveSettings();
             H2Launcher.XliveSettings.SaveSettings();
+        }
+        private void fpsToggle_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!this.fpsToggle.Checked)
+                this.fps_value_textbox.Enabled = false;
+            else
+                this.fps_value_textbox.Enabled = true;
+        }
+        private void fps_value_textbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+                e.Handled = true;
+        }
+
+        private void metroTextBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+                e.Handled = true;
         }
     }
 }

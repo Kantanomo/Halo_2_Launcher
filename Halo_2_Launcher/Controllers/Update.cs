@@ -301,7 +301,7 @@ namespace Halo_2_Launcher.Controllers
                     _isDownloading = true;
                 }
                 catch (Exception) { throw new Exception("Error"); }
-                //DownloadFile(tUO.remotepath, tUO.localpath);
+                DownloadFile(tUO.remotepath, tUO.localpath);
                 while (_isDownloading) { }
             }
         }
@@ -317,7 +317,7 @@ namespace Halo_2_Launcher.Controllers
                 this._Form.AddToDetails("Restarting Launcher to complete update");
                 Task.Delay(5000);
                 ProcessStartInfo Info = new ProcessStartInfo();
-                Info.Arguments = "/C ping 127.0.0.1 -n 1 -w 5000 > Nul & Del \"" + Application.ExecutablePath + "\" & ping 127.0.0.1 -n 1 -w 2000 > Nul & rename Halo_2_Launcher_temp.exe Halo_2_Launcher.exe & ping 127.0.0.1 -n 1 -w 2000 > Nul & start Halo_2_Launcher.exe";
+                Info.Arguments = "/C ping 127.0.0.1 -n 1 -w 5000 > Nul & Del \"" + Application.ExecutablePath + "\" & ping 127.0.0.1 -n 1 -w 2000 > Nul & rename Halo_2_Launcher_temp.exe Halo_2_Launcher.exe & ping 127.0.0.1 -n 1 -w 20000 > Nul & start Halo_2_Launcher.exe";
                 Info.WindowStyle = ProcessWindowStyle.Hidden;
                 Info.CreateNoWindow = true;
                 Info.WorkingDirectory = Application.StartupPath;

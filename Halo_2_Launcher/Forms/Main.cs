@@ -128,7 +128,7 @@ namespace Halo_2_Launcher.Forms
 
         private void registerButton_Click(object sender, EventArgs e)
         {
-            //System.Diagnostics.Process.Start(@"http://cartographer.online/");
+            //System.Diagnostics.Process.Start(@"http://www.cartographer.h2pc.org/");
             if (this.RegisterMode == false)
             {
                 this.usernameTextBox.Focus();
@@ -162,7 +162,7 @@ namespace Halo_2_Launcher.Forms
                 else
                 {
                     MetroMessageBox.Show(this, "Account created failed\r\nOpening the web registration page instead.", Fun.GoIdioms, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    System.Diagnostics.Process.Start(@"http://cartographer.online/");
+                    System.Diagnostics.Process.Start(@"http://www.cartographer.h2pc.org/");
                 }
                 //H2Launcher.WebControl.Register(this, this.usernameTextBox.Text, this.passwordTextBox.Text);
             }
