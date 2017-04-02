@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using MetroFramework.Forms;
 using Halo_2_Launcher.Controllers;
 using MetroFramework;
+using System.IO;
 using System.Globalization;
 
 namespace Halo_2_Launcher.Forms
@@ -29,6 +30,8 @@ namespace Halo_2_Launcher.Forms
             //}
             H2Launcher.LauncherSettings.LoadSettings();
             H2Launcher.XliveSettings.LoadSettings();
+            if (H2Launcher.LauncherSettings.GameEnvironment.ToString() == Objects.H2GameEnvironment.LIVE.ToString())
+                File.Delete(Objects.Paths.InstallPath + "xlive.dll");
             this.usernameTextBox.Text = H2Launcher.LauncherSettings.RememberUsername;
             if (H2Launcher.XliveSettings.loginToken != "")
             {

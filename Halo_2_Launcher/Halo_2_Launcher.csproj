@@ -85,7 +85,6 @@
     <Compile Include="Controllers\AntiCheat\Tags\Weapons.cs" />
     <Compile Include="Controllers\Fun.cs" />
     <Compile Include="Controllers\Game.cs" />
-    <Compile Include="Controllers\Hotkey.cs" />
     <Compile Include="Controllers\Memory.cs" />
     <Compile Include="Controllers\PostLaunch.cs" />
     <Compile Include="Controllers\Registry.cs" />

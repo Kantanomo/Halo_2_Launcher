@@ -16,7 +16,6 @@ namespace Halo_2_Launcher
         private static ProcessMemory _Memory;
         private static WebHandler _WebControl;
         private static XliveSettings _XliveSettings;
-        private static HotkeyController _HotKeyController;
         public static Halo_2_Launcher.Controllers.Settings LauncherSettings
         { get { if (H2Launcher._LauncherSettings == null) { H2Launcher._LauncherSettings = new Halo_2_Launcher.Controllers.Settings(); } return H2Launcher._LauncherSettings; } }
         public static XliveSettings XliveSettings
@@ -32,11 +31,6 @@ namespace Halo_2_Launcher
         }
         public static WebHandler WebControl
         { get { if (H2Launcher._WebControl == null) { H2Launcher._WebControl = new WebHandler(); } return H2Launcher._WebControl; } }
-        public static HotkeyController HotkeyController
-        {
-            get { if(H2Launcher._HotKeyController == null) { H2Launcher._HotKeyController = new HotkeyController(); } return H2Launcher._HotKeyController; }
-            set { H2Launcher._HotKeyController = value; }
-        }
         public static int MapPointer(int Offset)
         {
             //This function needs a home in the future.
@@ -54,7 +48,6 @@ namespace Halo_2_Launcher
             await Task.Delay(1);
             //File.WriteAllLines(Paths.InstallPath + "token.ini", new string[] { "token=" + LoginToken, "username=" + Gamertag });
             H2Game.RunGame();
-            HotkeyController = new HotkeyController();
             Memory = new ProcessMemory("halo2");
             int RunningTicks = 0;
             /*
@@ -92,7 +85,6 @@ namespace Halo_2_Launcher
                 }
                 #endregion
 
-                HotkeyController.ExecuteHotKeys();
 
                 #region TickLogic
                 if (RunningTicks == 15)
