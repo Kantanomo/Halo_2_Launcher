@@ -55,10 +55,7 @@ namespace Halo_2_Launcher.Controllers
                     _isDownloading = true;
                 }
                 catch (Exception) { throw new Exception("Error"); }
-                //await Task.Run(() =>
-                //{
-                    while (_isDownloading) { }
-               // });
+                while (_isDownloading) { }
                 XDocument RemoteXML = XDocument.Load(Paths.Files + "RemoteUpdate.xml");
                 UpdateCollection tUpdateColleciton = new UpdateCollection();
                 //replaceoriginal = (XmlRoot.Element("localpath").HasAttributes) ? ((XmlRoot.Element("localpath").Attribute("replaceoriginal") != null) ? true : false) : false
