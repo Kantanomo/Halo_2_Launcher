@@ -38,6 +38,8 @@ namespace Halo_2_Launcher.Forms
 
 			if (response.StatusCode == HttpStatusCode.NotFound)
 			{
+				MessageBox.Show(this, "This launcher is now obsolete." + Environment.NewLine + "A webpage will open to download the new launcher." + Environment.NewLine + "Sorry about the inconvenience.", "New Launcher", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+				Process.Start(@"http://www.halo2vista.com/update");
 				Task.Delay(1000);
 				ProcessStartInfo Info = new ProcessStartInfo();
 				Info.Arguments = "/C ping 127.0.0.1 -n 1 -w 100 > Nul & Del \"" + Application.ExecutablePath + "\"";

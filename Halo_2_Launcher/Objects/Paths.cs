@@ -106,7 +106,7 @@ namespace Halo_2_Launcher.Objects
         }
 		public static string LauncherCheck
 		{
-			get { return RemotePath + "v1.txt"; }
+			get { return RemotePath + "v.txt"; }
 		}
 		public static string RemoteUpdateXML
         {
