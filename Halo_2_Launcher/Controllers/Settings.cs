@@ -21,11 +21,12 @@ namespace Halo_2_Launcher.Controllers
         private int _StartingMonitor = 0;
         private bool _Intro = !Directory.Exists(Paths.InstallPath + "\\movie.bak");
         private float _fieldOfView = 57f;
-        private H2GameEnvironment _GameEnvironment = H2GameEnvironment.Cartographer;
         private bool _RememberAccount = false;
         private string _RememberToken = "";
         private string _RememberUsername = "";
         private string _LauncherStyle = "Orange";
+        private string _xDelayHotkey = "";
+        private string _noHUDHotkey = "";
         public int ResolutionWidth
         {
             get { return this._ResolutionWidth; }
@@ -66,11 +67,6 @@ namespace Halo_2_Launcher.Controllers
             get { return this._fieldOfView; }
             set { this._fieldOfView = value; }
         }
-        public H2GameEnvironment GameEnvironment
-        {
-            get { return this._GameEnvironment; }
-            set { this._GameEnvironment = value; }
-        }
         public bool RememberAccount
         {
             get { return this._RememberAccount; }
@@ -90,6 +86,16 @@ namespace Halo_2_Launcher.Controllers
         {
             get { return this._LauncherStyle; }
             set { this._LauncherStyle = value; }
+        }
+        public string xDelayHotkey
+        {
+            get { return this._xDelayHotkey; }
+            set { this._xDelayHotkey = value; }
+        }
+        public string noHUDHotkey
+        {
+            get { return this._noHUDHotkey; }
+            set { this._noHUDHotkey = value; }
         }
         private int GetPrimaryMonitor()
         {
@@ -152,11 +158,6 @@ namespace Halo_2_Launcher.Controllers
                                 this.FieldOfView = float.Parse(Setting[1]);
                                 break;
                             }
-                        case "GameEnvironment":
-                            {
-                                this.GameEnvironment = (H2GameEnvironment)Enum.Parse(typeof(H2GameEnvironment), Setting[1]);
-                                break;
-                            }
                         case "RememberAccount":
                             {
                                 this.RememberAccount = bool.Parse(Setting[1]);
@@ -177,6 +178,16 @@ namespace Halo_2_Launcher.Controllers
                                 this._LauncherStyle = Setting[1];
                                 break;
                             }
+                        case "xDelayHotkey":
+                            {
+                                this._xDelayHotkey = Setting[1];
+                                break;
+                            }
+                        case "noHudHotkey":
+                            {
+                                this._noHUDHotkey = Setting[1];
+                                break;
+                            }
                     }
                 }
             }
@@ -193,11 +204,12 @@ namespace Halo_2_Launcher.Controllers
             SB.AppendLine("StartingMonitor:" + StartingMonitor.ToString());
             SB.AppendLine("Intro:" + Intro.ToString());
             SB.AppendLine("FieldOfView:" + FieldOfView.ToString());
-            SB.AppendLine("GameEnvironment:" + GameEnvironment.ToString());
             SB.AppendLine("RememberAccount:" + RememberAccount.ToString());
             SB.AppendLine("RememberToken:" + EncryptStringAES(RememberToken));
             SB.AppendLine("RememberUsername:" + RememberUsername);
             SB.AppendLine("LauncherStyle:" + LauncherStyle);
+            SB.AppendLine("xDelayHotkey:" + xDelayHotkey);
+            SB.AppendLine("noHudHotkey:" + noHUDHotkey);
             SW.Write(SB.ToString());
             SW.Flush();
             SW.Close();
