@@ -13,8 +13,6 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using System.Xml;
-using System.Xml.Linq;
 
 namespace Halo_2_Launcher
 {
@@ -180,49 +178,10 @@ namespace Halo_2_Launcher
             string xlive = Paths.InstallPath + "xlive.dll";
             string xliveless = Paths.InstallPath + "xliveless.dll";
             string xlive_project = Paths.InstallPath + "xlive_project.dll";
-            string game_activation = Paths.InstallPath + "MF.dll";
-            string game_deactivation = Paths.InstallPath + "MF_disable.dll";
-            string localXML = Paths.Files + "LocalUpdate.xml";
-
-            XmlDocument local = new XmlDocument();
-            local.Load(localXML);
-            XmlNode file = local.DocumentElement.FirstChild;
-            XmlNodeList nameNodeList = local.GetElementsByTagName("name");
-            XmlNodeList localNodeList = local.GetElementsByTagName("localpath");
-
             switch (H2Launcher.LauncherSettings.GameEnvironment)
             {
                 case H2GameEnvironment.LIVE:
                     {
-                        if (File.Exists(localXML))
-                        {
-                            foreach (XmlNode nameNode in nameNodeList)
-                            {
-                                if (nameNode.InnerXml == "XLive")
-                                {
-                                    foreach (XmlNode localNode in localNodeList)
-                                    {
-                                        if (localNode.InnerXml == "{InstallDir}\\xlive.dll")
-                                            localNode.InnerText.Replace("{InstallDir}\\xlive.dll", "{InstallDir}\\xlive_project.dll");
-                                        //MessageBox.Show(localNode.InnerXml);
-                                    }
-                                }
-                                if(nameNode.InnerXml == "XLiveless")
-                                {
-                                    foreach (XmlNode localNode in localNodeList)
-                                    {
-                                        if (localNode.InnerXml == "{InstallDir}\\xlive.dll")
-                                            localNode.InnerText.Replace("{InstallDir}\\xlive.dll", "{InstallDir}\\xliveless.dll");
-                                        //MessageBox.Show(localNode.InnerXml);
-                                    }
-                                }
-                                if (nameNode.InnerXml == "{InstallDir}\\MF.dll")
-                                    nameNode.InnerText = "{InstallDir}\\MF_disable.dll";
-                                local.Save(localXML);
-                            }
-                        }
-                        if (File.Exists(game_activation))
-                            File.Move(game_activation, game_deactivation);
                         if (File.Exists(xlive) && File.Exists(xliveless))
                             File.Move(xlive, xlive_project);
                         else if (File.Exists(xlive) && File.Exists(xlive_project))
@@ -232,8 +191,6 @@ namespace Halo_2_Launcher
                     }
                 case H2GameEnvironment.Cartographer:
                     {
-                        if (File.Exists(game_deactivation))
-                            File.Move(game_deactivation, game_activation);
                         if (File.Exists(xlive) && !File.Exists(xliveless))
                         {
                             File.Move(xlive, xliveless);
@@ -246,8 +203,6 @@ namespace Halo_2_Launcher
                     }
                 case H2GameEnvironment.Xliveless:
                     {
-                        if (File.Exists(game_activation))
-                            File.Delete(game_activation);
                         if (!File.Exists(xlive) && !File.Exists(xliveless))
                             File.Move(xlive_project, xlive);
                         else if (File.Exists(xlive) && File.Exists(xliveless))

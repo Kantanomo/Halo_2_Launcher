@@ -1,16 +1,12 @@
 ﻿using Halo_2_Launcher.Controllers;
-using Halo_2_Launcher.Objects;
 using MetroFramework.Controls;
 using MetroFramework.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -23,39 +19,13 @@ namespace Halo_2_Launcher.Forms
         delegate void UpdateProgressCallback(int Precentage);
         delegate void UpdaterFinishedCallback();
         private UpdateController _UpdateController;
-
-		public Update()
-		{
-			InitializeComponent();
-
-			HttpWebRequest request = WebRequest.Create(Paths.LauncherCheck) as HttpWebRequest;
-			request.Method = "HEAD";
-			WebException we = new WebException();
-			HttpWebResponse response;
-			try { response = request.GetResponse() as HttpWebResponse; }
-			catch (WebException ex) { response = ex.Response as HttpWebResponse; }
-
-
-			if (response.StatusCode == HttpStatusCode.NotFound)
-			{
-				Task.Delay(1000);
-				ProcessStartInfo Info = new ProcessStartInfo();
-				Info.Arguments = "/C ping 127.0.0.1 -n 1 -w 100 > Nul & Del \"" + Application.ExecutablePath + "\"";
-				Info.WindowStyle = ProcessWindowStyle.Hidden;
-				Info.CreateNoWindow = true;
-				Info.WorkingDirectory = Application.StartupPath;
-				Info.FileName = "cmd.exe";
-				Process.Start(Info);
-				Process.GetCurrentProcess().Kill();
-			}
-			else
-			{
-				H2Launcher.LauncherSettings.LoadSettings();
-				_UpdateController = new UpdateController(this);
-				_UpdateController.CheckUpdates();
-				DetailsRichTextBox.BackColor = UpdateProgressBar.BackColor;
-			}
-		}
+        public Update()
+        {
+            InitializeComponent(); 
+            _UpdateController = new UpdateController(this);
+            _UpdateController.CheckUpdates();
+            DetailsRichTextBox.BackColor = UpdateProgressBar.BackColor;
+        }
         
         private void Update_Load(object sender, EventArgs e)
         {

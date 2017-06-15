@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Halo_2_Launcher.Objects;
 
 namespace Halo_2_Launcher.Objects
 {
@@ -12,7 +11,10 @@ namespace Halo_2_Launcher.Objects
     {
         public static string ExecutablePath
         {
-            get { return InstallPath + "\\Halo2.exe"; }
+            get
+            {
+                return InstallPath + "\\Halo2.exe";
+            }
         }
         public static string InstallPath
         {
@@ -58,14 +60,10 @@ namespace Halo_2_Launcher.Objects
         {
             get
             {
-                if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\H2PC\\H2Cartographer\\"))
-                    Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\H2PC\\H2Cartographer\\");
-                if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\H2PC\\H2Cartographer\\Download"))
-                    Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\H2PC\\H2Cartographer\\Download");
-                if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\H2PC\\H2Cartographer\\Files"))
-                    Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\H2PC\\H2Cartographer\\Files");
-                if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\H2PC\\H2Cartographer\\Files\\Content"))
-                    Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\H2PC\\H2Cartographer\\Files\\Content");
+                if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\H2PC\\H2Cartographer\\")) Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\H2PC\\H2Cartographer\\");
+                if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\H2PC\\H2Cartographer\\Download")) Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\H2PC\\H2Cartographer\\Download");
+                if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\H2PC\\H2Cartographer\\Files")) Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\H2PC\\H2Cartographer\\Files");
+                if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\H2PC\\H2Cartographer\\Files\\Content")) Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\H2PC\\H2Cartographer\\Files\\Content");
                 return Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\H2PC\\H2Cartographer\\";
             }
         }
@@ -76,17 +74,23 @@ namespace Halo_2_Launcher.Objects
         public static string Downloads
         {
             get
-            { return AppData + "\\Download\\"; }
+            {
+                return AppData + "\\Download\\";
+            }
         }
         public static string Files
         {
             get
-            { return AppData + "\\Files\\"; }
+            {
+                return AppData + "\\Files\\";
+            }
         }
         public static string Content
         {
             get
-            { return AppData + "\\Files\\Content\\"; }
+            {
+                return AppData + "\\Files\\Content\\";
+            }
         }
         public static string H2RegistryBase
         {
@@ -104,21 +108,9 @@ namespace Halo_2_Launcher.Objects
         {
             get { return RemotePath + "update/"; }
         }
-		public static string LauncherCheck
-		{
-			get { return RemotePath + "v1.txt"; }
-		}
-		public static string RemoteUpdateXML
+        public static string RemoteUpdateXML
         {
-            get
-            {
-                if (H2Launcher.LauncherSettings.GameEnvironment.ToString() == "Xliveless")
-                    return RemotePath + "update2.xml";
-                if (H2Launcher.LauncherSettings.GameEnvironment.ToString() == "LIVE")
-                    return RemotePath + "update3.xml";
-                else
-                    return RemotePath + "update.xml";
-            }
+            get { return RemotePath + "update.xml"; }
             //get { return RemotePath + "dev_update.xml"; }
         }
     }
